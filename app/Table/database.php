@@ -8,9 +8,16 @@
         private static $db = "jopizza";
         private static $pdo;
 
-        static function getDb(){
-            self::$pdo = new mysqli(self::$host, self::$user, self::$password, self::$db);
+        public static function getDb(){
+            if(!isset(self::$pdo)){
+                self::$pdo = new mysqli(self::$host, self::$user, self::$password, self::$db);
+            }
             return self::$pdo;
+        }
+
+        public static function select($query){
+            $mysqli = self::getDb();
+            return $mysqli->query($query);
         }
     }
 ?>
