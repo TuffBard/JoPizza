@@ -26,6 +26,7 @@
                     <a href="index.php?p=Commander" class="nav-link">Commander</a>
                 </li>
             </ul>
+            <a href="index.php?p=Connexion" class="nav-link" style="color:white;">Se connecter</a>
         </div>
     </nav>
     <div class="site-wrapper">
