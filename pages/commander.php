@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="public/css/commander.css">
+<script src="public/js/commander.js"></script>
 
 <br/>
 <div class="container">

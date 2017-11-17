@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+$client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
+?>
 <html>
 
 <head>
@@ -5,11 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="public/css/main.css">
-    <link rel="stylesheet" href="public/css/commander.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="public/js/commander.js"></script>
 </head>
 
 <body>
@@ -26,11 +28,26 @@
                     <a href="index.php?p=Commander" class="nav-link">Commander</a>
                 </li>
             </ul>
-            <a href="index.php?p=Connexion" class="nav-link" style="color:white;">Se connecter</a>
+            <?php 
+                if($client != null){
+
+                } else { 
+            ?>
+                    <ul class='navbar-nav'>
+                        <li>
+                            <a href='index.php?p=Connexion' class='nav-link'>Se connecter</a>
+                        </li>
+                    </ul>
+            <?php
+                }
+            ?>
         </div>
     </nav>
     <div class="site-wrapper">
         <?= $content ?>
+    </div>
+    <div id="footer" class="text-muted">
+        <p><a href="index.php?p=legals">Mentions légales</a></p>
     </div>
 </body>
 

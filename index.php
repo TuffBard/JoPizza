@@ -1,10 +1,12 @@
 <?php
+    require_once("app/autoloader.php");
+    Autoloader::register();
 
-$p = isset($_GET['p']) ? $_GET['p'] : "home";
+    $p = isset($_GET['p']) ? $_GET['p'] : "home";
 
-ob_start();
-require("/pages/" . $p . ".php");
-$content = ob_get_clean();
+    ob_start();
+    require("pages/" . $p . ".php");
+    $content = ob_get_clean();
 
-require("/templates/layout.php")
+    require("templates/layout.php")
 ?>
