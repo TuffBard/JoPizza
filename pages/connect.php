@@ -11,9 +11,9 @@
     $client = Client::login($_POST["username"],$_POST["password"]);
 
     if($client == null){
-        $_SESSION["client"] = $client;
         header('Location: ../index.php?p=connexion&bl=1');
     } else {
+        $_SESSION["client"] = $client;
         header('Location: ../index.php');
     }
 ?>

@@ -1,5 +1,5 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
 ?>
 <html>
@@ -28,24 +28,24 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
                     <a href="index.php?p=Commander" class="nav-link">Commander</a>
                 </li>
             </ul>
-            <?php 
-                if($client != null){
-            ?>
-                    <ul class='navbar-nav'>
-                        <li>
-                            <a href='index.php?p='><?=$client->prenom?></a>
-                        </li>
-                    </ul>
             <?php
-                } else { 
+            if ($client != null) {
             ?>
-                    <ul class='navbar-nav'>
-                        <li>
-                            <a href='index.php?p=Connexion' class='nav-link'>Se connecter</a>
-                        </li>
-                    </ul>
+                <ul class='navbar-nav'>
+                    <li class="nav-item">
+                        <a href='index.php?p=disconnect' class="nav-link">Déconnexion</a>
+                    </li>
+                </ul>
             <?php
-                }
+            } else {
+            ?>
+                <ul class='navbar-nav'>
+                    <li>
+                        <a href='index.php?p=Connexion' class='nav-link'>Se connecter</a>
+                    </li>
+                </ul>
+            <?php
+            }
             ?>
         </div>
     </nav>
