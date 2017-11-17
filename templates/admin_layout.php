@@ -1,6 +1,5 @@
-<?php 
-session_start(); 
-$client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
+<?php
+$user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
 ?>
 <html>
 
@@ -20,30 +19,21 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
             <img src="public/img/pizza.png" alt="" class="rotate90">
         </a>
         <div class="collapse navbar-collapse">
+            <?php
+            if($user != NULL){ ?>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="index.php" class="nav-link">Accueil</a>
+                    <a href="admin.php?p=home" class="nav-link">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?p=Commander" class="nav-link">Commander</a>
+                    <a href="admin.php?p=pizzas" class="nav-link">Les pizzas</a>
                 </li>
             </ul>
-            <?php 
-                if($client != null){
-            ?>
-                    <ul class='navbar-nav'>
-                        <li>
-                            <a href='index.php?p='><?=$client->prenom?></a>
-                        </li>
-                    </ul>
-            <?php
-                } else { 
-            ?>
-                    <ul class='navbar-nav'>
-                        <li>
-                            <a href='index.php?p=Connexion' class='nav-link'>Se connecter</a>
-                        </li>
-                    </ul>
+            <ul class='navbar-nav'>
+                <li style="color:white;">
+                    Bonjour <?=$user->name?> ! <a href="admin.php?p=disconnect">Deconnexion</a>
+                </li>
+            </ul>
             <?php
                 }
             ?>
@@ -51,10 +41,6 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
     </nav>
     <div class="site-wrapper">
         <?= $content ?>
-    </div>
-    <div id="footer" class="text-muted">
-        <p><a href="admin.php?p=home">Admin</a></p>
-        <p><a href="index.php?p=legals">Mentions légales</a></p>
     </div>
 </body>
 
