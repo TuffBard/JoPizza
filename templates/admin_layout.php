@@ -30,7 +30,7 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
                 </li>
             </ul>
             <ul class='navbar-nav'>
-                <li style="color:white;">
+                <li class="text-light">
                     Bonjour <?=$user->name?> ! <a href="admin.php?p=disconnect">Deconnexion</a>
                 </li>
             </ul>
