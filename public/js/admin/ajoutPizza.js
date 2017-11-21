@@ -1,5 +1,6 @@
 $(function(){
     initIngredientTable();
+    initValidate();
 });
 
 function initIngredientTable(){
@@ -33,5 +34,10 @@ function initIngredientTable(){
 }
 
 function initValidate(){
-    $("#nom").rules()
+    $("#prix").on("blur",function(){
+        var input = $(this).val().replace(",",".");
+        input = !isNaN(parseFloat(input)) ? parseFloat(input) : 0;
+        input = input.toFixed(2);
+        $(this).val(input);
+    });
 }

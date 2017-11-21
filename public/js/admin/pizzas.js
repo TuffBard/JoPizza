@@ -1,6 +1,4 @@
 $(function(){
-    //Ready
-
     initDatatable();
 });
 
@@ -35,7 +33,7 @@ function initDatatable(){
             {
                 targets: 3,
                 render: function(data, type, row) {
-                    return "<button class='btn btn-primary btn-sm' data-id='"+data+"'><b>Modifier</b></button>";
+                    return "<a href='admin.php?p=editerPizza&id=" + data + "' class='btn btn-primary btn-sm'><b>Modifier</b></button>";
                 }
             }
         ]

@@ -13,6 +13,16 @@ class Ingredient {
     }
 
     /**
+     * Ajout un ingredient à une pizza en fonction de leur id
+     * @param Int $idPizza Id de la pizza
+     * @param Int $idIngredient Id de l'ingredient
+     */
+    public static function insert($idPizza, $idIngredient){
+        $query = "INSERT INTO `listingredient` (`idPizza`, `idIngredient`) VALUES ('$idPizza', '$idIngredient')";
+        return Database::insert($query);
+    }
+
+    /**
      * Renvoi la liste de tous les ingrédients
      * @return Array<Ingredient> Liste des ingrédients
      */
@@ -50,6 +60,15 @@ class Ingredient {
             $ingredients[] = $ingredient; 
         } 
         return $ingredients; 
+    }
+
+    /**
+     * Supprime tous les ingrédients d'une pizza
+     * @param Int $idPizza Id de la pizza
+     */
+    public static function deleteAllByPizza($idPizza){
+        $query = "DELETE FROM `listingredient` WHERE idPizza = " . $idPizza;
+        Database::delete($query);
     }
 } 
  

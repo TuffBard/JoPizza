@@ -19,5 +19,21 @@
             $mysqli = self::getDb();
             return $mysqli->query($query);
         }
+
+        public static function insert($query){
+            $mysqli = self::getDb();
+            $mysqli->query($query);
+            return $mysqli->insert_id;
+        }
+
+        public static function update($query){
+            $mysqli = self::getDb();
+            return $mysqli->query($query);
+        }
+
+        public static function delete($query){
+            $mysqli = self::getDb();
+            return $mysqli->query($query);
+        }
     }
 ?>

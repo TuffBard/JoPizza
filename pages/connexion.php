@@ -8,11 +8,11 @@
             <div class="card-body">
                 <form action="pages/connect.php" method="POST">
                     <div class="form-inline justify-content-center">
-                        <input type="text" id="username" class="form-control col-3" placeholder="Nom d'utilisateur" name="username">
+                        <input type="text" id="username" class="form-control col-3 required" placeholder="Nom d'utilisateur" name="username">
                     </div>
                     <br/>
                     <div class="form-inline justify-content-center">
-                        <input type="password" id="password" class="form-control col-3" placeholder="Mot de passe" name="password">
+                        <input type="password" id="password" class="form-control col-3 required" placeholder="Mot de passe" name="password">
                     </div>
                     <br>
                     <?php

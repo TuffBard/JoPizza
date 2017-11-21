@@ -52,3 +52,8 @@ body {
 #footer a{
     color: grey;
 }
+
+.error {
+    width: 100%;
+    color: red;
+}
