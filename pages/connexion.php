@@ -16,7 +16,7 @@
                     </div>
                     <br>
                     <?php
-                    if(isset($_GET["bl"])){
+                    if (isset($_GET["bl"])) {
                     ?>
                         <div class='form-inline justify-content-center'>
                             <div class='alert alert-danger col-4' role='alert'>

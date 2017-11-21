@@ -1,3 +1,5 @@
+<!-- <link rel="stylesheet" href="public/css/ajoutPizza.css"> -->
+<script src="public/js/admin/ajoutPizza.js"></script>
 <div class="container">
     <div class="col-12">
         <br/>
@@ -13,6 +15,16 @@
                     <br>
                     <div class="form-inline justify-content-center">
                         <input type="text" id="prix" class="form-control col-3" placeholder="Prix" name="prix">
+                    </div>
+                    <div class="col-6 ml-auto mr-auto">
+                        <table class="list-ingredient table">
+                            <thead>
+                                <tr>
+                                    <th>Ingrédient</th>
+                                    <th>Sélection</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                     <br>
                     <div class="form-inline justify-content-center">

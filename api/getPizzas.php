@@ -1,4 +1,4 @@
 <?php
     use App\Table\Pizza;
-    echo Pizza::getAllPizzasToJson();
+    echo json_encode(Pizza::getAll());
 ?>
