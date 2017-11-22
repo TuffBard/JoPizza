@@ -6,7 +6,10 @@ use App\Table\Database;
 class Ingredient { 
     public $id; 
     public $libelle; 
- 
+
+    /**
+     * Constructeur de la classe
+     */
     public function __construct($id, $libelle){ 
         $this->id = $id; 
         $this->libelle = $libelle; 
@@ -38,10 +41,11 @@ class Ingredient {
      * @return Array<Ingredient> Liste des ingrédients de la pizza
      */
     public static function getByPizzaId($id) {
-        $query = "select i.id, i.libelle 
-                from ingredient i 
-                left join listingredient l on i.id = l.idIngredient 
-                where l.idPizza = " . $id; 
+        $query = "SELECT i.id, i.libelle 
+                FROM ingredient i 
+                LEFT JOIN listingredient l on i.id = l.idIngredient 
+                WHERE l.idPizza = " . $id . "
+                ORDER BY l.idIngredient";
 
         return self::getList($query); 
     }

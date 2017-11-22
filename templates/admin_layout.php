@@ -8,11 +8,13 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/open-iconic/font/css/open-iconic-bootstrap.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
     <script src="public/js/validate.js"></script>
 </head>
 
@@ -30,6 +32,9 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
                 </li>
                 <li class="nav-item">
                     <a href="admin.php?p=pizzas" class="nav-link">Les pizzas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin.php?p=ingredients" class="nav-link">Les ingrédients</a>
                 </li>
             </ul>
             <ul class='navbar-nav'>
