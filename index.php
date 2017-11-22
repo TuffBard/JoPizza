@@ -2,6 +2,8 @@
     require_once("app/autoloader.php");
     Autoloader::register();
 
+    session_start();
+
     $p = isset($_GET['p']) ? $_GET['p'] : "home";
 
     ob_start();

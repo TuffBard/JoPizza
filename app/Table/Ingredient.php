@@ -20,9 +20,37 @@ class Ingredient {
      * @param Int $idPizza Id de la pizza
      * @param Int $idIngredient Id de l'ingredient
      */
-    public static function insert($idPizza, $idIngredient){
+    public static function insertPizza($idPizza, $idIngredient){
         $query = "INSERT INTO `listingredient` (`idPizza`, `idIngredient`) VALUES ('$idPizza', '$idIngredient')";
         return Database::insert($query);
+    }
+
+    /**
+     * Ajout d'un ingrédient
+     * @param String $libelle Nom de l'ingrédient
+     */
+    public static function insert($libelle){
+        $query = "INSERT INTO `ingredient` (`libelle`) VALUES ('$libelle')";
+        return Database::insert($query);
+    }
+
+    /**
+     * Mise à jour d'un ingrédient
+     * @param Int $id Id de l'ingrédient
+     * @param String $libelle Nom de l'ingredient
+     */
+    public static function update($id, $libelle){
+        $query = "UPDATE `ingredient` SET `libelle` = '$libelle' WHERE `id` = $id";
+        return Database::update($query);
+    }
+
+    /**
+     * Supprime un ingrédient
+     * @param Int $id Id de l'ingredient
+     */
+    public static function delete($id){
+        $query = "DELETE FROM `ingredient` WHERE `id` = $id";
+        return Database::delete($query);
     }
 
     /**
@@ -33,6 +61,13 @@ class Ingredient {
         $query = "select * from ingredient";
 
         return self::getList($query);
+    }
+
+    public static function getById($id){
+        $query = "SELECT * FROM ingredient WHERE id = " . $id;
+        $result = Database::select($query);
+        $row = $result->fetch_array(MYSQL_ASSOC);
+        return new Ingredient($row["id"], $row["libelle"]);
     }
 
     /**
