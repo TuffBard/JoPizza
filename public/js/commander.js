@@ -1,6 +1,6 @@
 $(function() {
     initPizzaTable();
-    initBtnContinuer();
+    initFormValidation();
 });
 
 function initPizzaTable() {
@@ -34,23 +34,29 @@ function initPizzaTable() {
             {
                 targets: 3,
                 render: function(data, type, row) {
-                    return "<input class='form-control input-pizza' type='number' data-id='" + data + "'>";
-                }
-            }, {
-                targets: 4,
-                render: function(data, type, row) {
-                    return "<button class='btn btn-primary btn-sm'>+</button> <button class='btn btn-danger btn-sm'>-</button>";
+                    let template = $("#template-input").html();
+                    let values = { id: data };
+                    return Mustache.render(template, values);
                 }
             }
+            // , {
+            //     targets: 4,
+            //     render: function(data, type, row) {
+            //         let template = $("#template-action").html();
+            //         let values = { id: data };
+            //         return Mustache.render(template, values);
+            //     }
+            // }
         ]
     });
 }
 
+
 function initBtnContinuer() {
-    $(".btn-continuer").click(function() {
+    $(".btn-continuer").click(function () {
         let listPizza = [];
 
-        $(".input-pizza").each(function() {
+        $(".input-pizza").each(function () {
             listPizza.push({
                 id: $(this).data("id"),
                 quantity: $(this).val()
@@ -58,5 +64,20 @@ function initBtnContinuer() {
         });
         listPizza = JSON.stringify(listPizza);
         console.log(listPizza);
+    });
+}
+
+function initFormValidation() {
+    $("form").submit(function(event){        
+
+        let total = 0;        
+        $(".input-pizza").each(function () {
+            total += ~~$(this).val();
+        });
+        
+        if(total == 0){
+            event.preventDefault();
+            $("#pizza-error").html("Veuillez choisir au moins une pizza.");
+        }
     });
 }

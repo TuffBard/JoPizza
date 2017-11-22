@@ -1,8 +1,8 @@
 <?php   
-    namespace App\Table;
-    
-    use App\Table\Database;
-    use App\Table\Ingredient;
+namespace App\Table;
+
+use App\Table\Database;
+use App\Table\Ingredient;
 
 class Pizza {
     public $id;
@@ -10,6 +10,9 @@ class Pizza {
     public $prix;
     public $ingredients;
 
+    /**
+     * Constructeur de la classe
+     */
     public function __construct($id, $libelle, $prix) {
         $this->id = $id;
         $this->libelle = $libelle;
@@ -28,10 +31,14 @@ class Pizza {
      */
     public static function getAll() {
         $query = "SELECT * FROM pizza";
-        $pizzas = self::getList($query);
-        return $pizzas;
+        return self::getList($query);
     }
 
+    /**
+     * Renvoi une pizza en fonction de son id
+     * @param Int $id Id de la pizza
+     * @return Pizza
+     */
     public static function getById($id){
         $query = "SELECT * FROM pizza WHERE id = " . $id;
         $result = Database::select($query);
@@ -63,7 +70,7 @@ class Pizza {
         $query = "INSERT INTO `pizza` (`libelle`, `prix`) VALUES ('$libelle', '$prix')";
         $idPizza = Database::insert($query);
         foreach($ingredients as $ingredient){
-            Ingredient::insert($idPizza, $ingredient);
+            Ingredient::insertPizza($idPizza, $ingredient);
         }
     }
 
@@ -81,8 +88,20 @@ class Pizza {
         Ingredient::deleteAllByPizza($idPizza);
         //Ajoute les ingrédients mis à jour
         foreach($ingredients as $ingredient){
-            Ingredient::insert($idPizza, $ingredient);
+            Ingredient::insertPizza($idPizza, $ingredient);
         }
+    }
+
+    /**
+     * Supprime une pizza
+     * @param Int $id Id de la pizza
+     */
+    public static function delete($id){
+        //Supprime tous les ingrédients d'une pizza
+        Ingredient::deleteAllByPizza($idPizza);
+        
+        $query = "DELETE FROM `pizza` WHERE `id` = $id";
+        Database::delete($query);
     }
 }
 

@@ -6,7 +6,10 @@ use App\Table\Database;
 class Ingredient { 
     public $id; 
     public $libelle; 
- 
+
+    /**
+     * Constructeur de la classe
+     */
     public function __construct($id, $libelle){ 
         $this->id = $id; 
         $this->libelle = $libelle; 
@@ -17,9 +20,37 @@ class Ingredient {
      * @param Int $idPizza Id de la pizza
      * @param Int $idIngredient Id de l'ingredient
      */
-    public static function insert($idPizza, $idIngredient){
+    public static function insertPizza($idPizza, $idIngredient){
         $query = "INSERT INTO `listingredient` (`idPizza`, `idIngredient`) VALUES ('$idPizza', '$idIngredient')";
         return Database::insert($query);
+    }
+
+    /**
+     * Ajout d'un ingrédient
+     * @param String $libelle Nom de l'ingrédient
+     */
+    public static function insert($libelle){
+        $query = "INSERT INTO `ingredient` (`libelle`) VALUES ('$libelle')";
+        return Database::insert($query);
+    }
+
+    /**
+     * Mise à jour d'un ingrédient
+     * @param Int $id Id de l'ingrédient
+     * @param String $libelle Nom de l'ingredient
+     */
+    public static function update($id, $libelle){
+        $query = "UPDATE `ingredient` SET `libelle` = '$libelle' WHERE `id` = $id";
+        return Database::update($query);
+    }
+
+    /**
+     * Supprime un ingrédient
+     * @param Int $id Id de l'ingredient
+     */
+    public static function delete($id){
+        $query = "DELETE FROM `ingredient` WHERE `id` = $id";
+        return Database::delete($query);
     }
 
     /**
@@ -32,16 +63,24 @@ class Ingredient {
         return self::getList($query);
     }
 
+    public static function getById($id){
+        $query = "SELECT * FROM ingredient WHERE id = " . $id;
+        $result = Database::select($query);
+        $row = $result->fetch_array(MYSQL_ASSOC);
+        return new Ingredient($row["id"], $row["libelle"]);
+    }
+
     /**
      * Obtient la liste des ingrédients d'une pizza
      * @param Int $id Id de la pizza
      * @return Array<Ingredient> Liste des ingrédients de la pizza
      */
     public static function getByPizzaId($id) {
-        $query = "select i.id, i.libelle 
-                from ingredient i 
-                left join listingredient l on i.id = l.idIngredient 
-                where l.idPizza = " . $id; 
+        $query = "SELECT i.id, i.libelle 
+                FROM ingredient i 
+                LEFT JOIN listingredient l on i.id = l.idIngredient 
+                WHERE l.idPizza = " . $id . "
+                ORDER BY l.idIngredient";
 
         return self::getList($query); 
     }

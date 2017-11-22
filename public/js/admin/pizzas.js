@@ -33,7 +33,11 @@ function initDatatable(){
             {
                 targets: 3,
                 render: function(data, type, row) {
-                    return "<a href='admin.php?p=editerPizza&id=" + data + "' class='btn btn-primary btn-sm'><b>Modifier</b></button>";
+                    var template = $("#template-action").html();
+                    var values = {
+                        id : data
+                    };
+                    return Mustache.render(template, values);
                 }
             }
         ]

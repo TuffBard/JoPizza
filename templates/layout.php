@@ -1,5 +1,4 @@
 <?php
-session_start();
 $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
 ?>
 <html>
@@ -14,6 +13,7 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
     <script src="public/js/validate.js"></script>
 </head>
 
