@@ -47,8 +47,8 @@ class Commande {
      * @param Float $prix Prix de la pizza
      * @param Array<Int> $ingredients Liste des ids des ingrédients de la pizza
      */
-    public static function insert($idClient,$idPaiement,$total,$details){
-        $query = "INSERT INTO `commande` (`idClient`, `idPaiement`, `total`) VALUES ('$idClient', '$idPaiement', '$total')";
+    public static function insert($idClient,$horaire,$total,$details){
+        $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`) VALUES ('$idClient', '$idPaiement', '$total')";
         $idPizza = Database::insert($query);
         foreach($details as $detail){
             Detail::insertCommande($idCommande, $idPizza);
