@@ -27,8 +27,8 @@ $order = $_SESSION["order"];
                         <?php
                             $total = 0;
                             foreach ($order as $id => $quantity)
-                            { 
-                                if($quantity > 0) 
+                            {
+                                if($quantity > 0)
                                 {
                                     $pizza = Pizza::getById($id);
                                     $total += $pizza->prix;
@@ -39,9 +39,9 @@ $order = $_SESSION["order"];
                                         <td><?=$pizza->prix?></td>
                                         <td><?=$quantity?></td>
                                     </tr>
-                        <?php 
-                                } 
-                            } 
+                        <?php
+                                }
+                            }
                         ?>
                         <tr>
                             <td></td>
@@ -51,6 +51,10 @@ $order = $_SESSION["order"];
                         </tr>
                         </tbody>
                     </table>
+                    <div class="form-inline">
+                        <label for="horaire" class="label col-2">Choix de l'horaire :</label>
+                        <select id="horaire" class="form-control col-2" name="horaire"></select>
+                    </div>
                     <input type="hidden" value="<?=$total?>"  name="total">
                     <button class="btn btn-success float-right mt-md-3"><b>Valider</b></button>
                 </form>

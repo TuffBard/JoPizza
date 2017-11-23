@@ -17,12 +17,14 @@ class Detail {
     }
 
     /**
-     * Ajoute une pizza à une commande en fonction de son id
-     * @param Int $idPizza Id de la pizza
-     * @param Int $idIngredient Id de l'ingredient
-     */
+    * Ajoute une pizza à une commande en fonction de son id
+    * @param Int $idPizza Id de la pizza
+    * @param Int $idIngredient Id de l'ingredient
+    * @return Void
+    */
     public static function insertPizza($idCommande, $idPizza){
         $query = "INSERT INTO `detail` (`idCommande`, `idPizza`) VALUES ('$idCommande', '$idPizza')";
-        return Database::insert($query);
+        Database::insert($query);
     }
 }
+?>

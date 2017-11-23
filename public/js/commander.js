@@ -68,13 +68,13 @@ function initBtnContinuer() {
 }
 
 function initFormValidation() {
-    $("form").submit(function(event){        
+    $("form").submit(function(event){
 
-        let total = 0;        
+        let total = 0;
         $(".input-pizza").each(function () {
             total += ~~$(this).val();
         });
-        
+
         if(total == 0){
             event.preventDefault();
             $("#pizza-error").html("Veuillez choisir au moins une pizza.");
