@@ -48,10 +48,11 @@ class Commande {
      * @param Array<Int> $ingredients Liste des ids des ingrédients de la pizza
      */
     public static function insert($idClient,$horaire,$total,$details){
-        $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`) VALUES ('$idClient', '$idPaiement', '$total')";
-        $idPizza = Database::insert($query);
+        $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`) VALUES ('$idClient', '$horaire', '$total')";
+        var_dump($query);
+        $idCommande = Database::insert($query);
         foreach($details as $detail){
-            Detail::insertCommande($idCommande, $idPizza);
+            Detail::insertCommande($idCommande, $detail);
         }
     }
 }

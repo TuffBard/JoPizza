@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
                 <label id="pizza-error" class="error" for="libelle"></label>
-                <form action="index.php?p=command" method="post">
+                <form action="index.php?p=myorder" method="post">
                     <button class="btn btn-success float-right mb-md-3 btn-continuer"><b>Continuer</b></button>
                     <table class="list-pizza table" width="100%">
                         <thead>
@@ -35,6 +35,6 @@
 </script>
 
 <!-- <script id="template-action" type="x-tmpl-mustache">
-    <button class='btn btn-primary btn-sm' data-id='{{id}}'>+</button> 
-    <button class='btn btn-danger btn-sm' data-id='{{id}}'>-</button>    
+    <button class='btn btn-primary btn-sm' data-id='{{id}}'>+</button>
+    <button class='btn btn-danger btn-sm' data-id='{{id}}'>-</button>
 </script> -->

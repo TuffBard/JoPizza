@@ -1,5 +1,14 @@
 <?php
 use App\Table\Pizza;
+use App\Table\Client;
+
+if(isset($_POST["pizzas"])){
+    $_SESSION["order"] = $_POST["pizzas"];
+}
+
+if(!isset($_SESSION["client"])){
+    header("Location: index.php?p=connexion");
+}
 
 $order = $_SESSION["order"];
 ?>

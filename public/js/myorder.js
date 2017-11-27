@@ -42,7 +42,7 @@ function initHoraire(){
     //Remplis le select
     hours.forEach(function(x){
         $("#horaire").append(new Option(x,x,true,true));
-    })
+    });
 }
 /**
 * Retourne si c'est le weekend ou non

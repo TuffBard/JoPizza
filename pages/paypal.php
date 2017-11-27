@@ -1,5 +1,6 @@
 <?php
     use App\Table\Commande;
+
     $idClient = $_SESSION["client"]->id;
     $details = $_SESSION["order"];
     $total = $_POST["total"];
@@ -10,9 +11,9 @@
     $date = new DateTime();
     $date->setTime($horaire[0],$horaire[1]);
 
-    //var_dump($date);
+    $date = $date->format("Y-m-d H:i:s");
 
-    //Commande::insert($idClient,$horaire,$total,$details);
+    Commande::insert($idClient,$date,$total,$details);
  ?>
 
 Paiement par paypal
