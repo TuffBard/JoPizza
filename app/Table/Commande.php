@@ -51,8 +51,8 @@ class Commande {
         $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`) VALUES ('$idClient', '$horaire', '$total')";
         var_dump($query);
         $idCommande = Database::insert($query);
-        foreach($details as $detail){
-            Detail::insertCommande($idCommande, $detail);
+        foreach($details as $idPizza => $quantity){
+            Detail::insertPizza($idCommande, $idPizza, $quantity);
         }
     }
 }

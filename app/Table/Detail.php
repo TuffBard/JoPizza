@@ -22,8 +22,8 @@ class Detail {
     * @param Int $idIngredient Id de l'ingredient
     * @return Void
     */
-    public static function insertPizza($idCommande, $idPizza){
-        $query = "INSERT INTO `detail` (`idCommande`, `idPizza`) VALUES ('$idCommande', '$idPizza')";
+    public static function insertPizza($idCommande, $idPizza, $quantity){
+        $query = "INSERT INTO `detail` (`idCommande`, `idPizza`, `quantity`) VALUES ('$idCommande', '$idPizza', '$quantity')";
         Database::insert($query);
     }
 }
