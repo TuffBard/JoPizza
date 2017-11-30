@@ -6,20 +6,23 @@
 
     //Met sous la forme X.XX €
     $money = str_replace(".",",",number_format($total,2))." €";
+    if(!isset($_SESSION["commande"]))
+    {
+        //Supprime les données vides
+        $details = array_filter($_SESSION["order"], function($v, $k){
+            return $v != "";
+        }, ARRAY_FILTER_USE_BOTH);
 
-    //Supprime les données vides
-    $details = array_filter($_SESSION["order"], function($v, $k){
-        return $v != "";
-    }, ARRAY_FILTER_USE_BOTH);
+        $horaire = $_POST["horaire"];
+        $horaire = explode(":",$horaire);
+        $date = new DateTime();
+        $date->setTime($horaire[0],$horaire[1]);
 
-    $horaire = $_POST["horaire"];
-    $horaire = explode(":",$horaire);
-    $date = new DateTime();
-    $date->setTime($horaire[0],$horaire[1]);
+        $date = $date->format("Y-m-d H:i:s");
 
-    $date = $date->format("Y-m-d H:i:s");
-
-    Commande::insert($idClient,$date,$total,$details);
+        $idCommande = Commande::insert($idClient,$date,$total,$details);
+        $_SESSION["commande"] = $idCommande;
+    }
  ?>
 
 Paiement par paypal

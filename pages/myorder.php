@@ -4,6 +4,7 @@ use App\Table\Client;
 
 if(isset($_POST["pizzas"])){
     $_SESSION["order"] = $_POST["pizzas"];
+    unset($_SESSION["commande"]);
 }
 
 if(!isset($_SESSION["client"])){
@@ -40,7 +41,7 @@ $order = $_SESSION["order"];
                                 if($quantity > 0)
                                 {
                                     $pizza = Pizza::getById($id);
-                                    $total += $pizza->prix;
+                                    $total += $pizza->prix * $quantity;
                         ?>
                                     <tr>
                                         <td><?=$pizza->libelle?></td>
