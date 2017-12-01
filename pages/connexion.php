@@ -30,7 +30,7 @@
                         <input type="submit" class="form-control" value="Connexion">
                     </div>
                     <br/>
-                    <a href="#">Nouveau client</a>
+                    <a href="index.php?r=compte&p=CreerCompte">Nouveau client</a>
                 </form>
             </div>
         </div>

@@ -1,0 +1,7 @@
+.input-width {
+    min-width: 200px;
+}
+
+span.req {
+    color: red;
+}
