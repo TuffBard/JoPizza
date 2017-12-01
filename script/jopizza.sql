@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 29 nov. 2017 à 13:58
+-- Généré le :  ven. 01 déc. 2017 à 17:01
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -48,7 +48,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `nom`, `prenom`, `login`, `password`, `dateNaissance`, `adresse`, `codePostal`, `tel`, `mail`) VALUES
-(1, 'Garcia', 'Nicolas', 'ngarcia', 'ngarcia', '1995-05-11', NULL, NULL, '0689536602', 'ngarcia@umanis.com');
+(1, 'Garcia', 'Nicolas', 'ngarcia', 'f41e03d1fb6ec773db0f987fba9853f46ee513cc', '1995-05-11', NULL, NULL, '0689536602', 'ngarcia@umanis.com');
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `commande` (
   `idClient` int(11) DEFAULT NULL,
   `idPaiement` int(11) DEFAULT NULL,
   `Total` double DEFAULT NULL,
-  `horaire` date DEFAULT NULL,
+  `horaire` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -70,11 +70,13 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`id`, `idClient`, `idPaiement`, `Total`, `horaire`, `status`) VALUES
-(1, 1, NULL, 17, '2017-11-27', 0),
-(2, 1, NULL, 17, '2017-11-27', 0),
-(3, 1, NULL, 6.5, '2017-11-28', 0),
-(4, 1, NULL, 23.5, '2017-11-29', 0),
-(5, 1, NULL, 23.5, '2017-11-29', 1);
+(8, 1, NULL, 50.5, '2017-11-30 11:50:00', 1),
+(9, 1, NULL, 50.5, '2017-11-30 11:50:00', 1),
+(10, 1, NULL, 94.5, '2017-11-30 13:30:00', 1),
+(11, 1, NULL, 18, '2017-11-30 13:30:00', 1),
+(12, 1, NULL, 6.5, '2017-12-01 22:00:00', 1),
+(13, 1, NULL, 6.5, '2017-12-01 22:00:00', 1),
+(14, 1, NULL, 9, '2017-12-01 22:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -95,9 +97,19 @@ CREATE TABLE `detail` (
 --
 
 INSERT INTO `detail` (`id`, `idPizza`, `idCommande`, `idPerso`, `quantity`) VALUES
-(1, 1, 5, NULL, 1),
-(2, 2, 5, NULL, 2),
-(3, 3, 5, NULL, 3);
+(11, 1, 8, NULL, 1),
+(12, 3, 8, NULL, 2),
+(13, 6, 8, NULL, 3),
+(14, 1, 9, NULL, 1),
+(15, 3, 9, NULL, 2),
+(16, 6, 9, NULL, 3),
+(17, 1, 10, NULL, 1),
+(18, 3, 10, NULL, 4),
+(19, 5, 10, NULL, 6),
+(20, 6, 11, NULL, 2),
+(21, 1, 12, NULL, 1),
+(22, 1, 13, NULL, 1),
+(23, 5, 14, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -331,7 +343,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `password`, `name`) VALUES
-(1, 'jopizza', 'jopizza', 'Jo');
+(1, 'jopizza', '03a7191321edb1c72cb9be2a2b9ac7faba287368', 'Jo');
 
 --
 -- Index pour les tables déchargées
@@ -401,12 +413,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT pour la table `ingredient`
 --
