@@ -2,6 +2,8 @@
 namespace App\Table;
 
 use App\Table\Database;
+use App\Table\Pizza;
+use App\Table\Status;
 
 class Commande {
     public $id;
@@ -10,9 +12,17 @@ class Commande {
     public $total;
     public $horaire;
     public $status;
+    public $details;
+    public $client;
 
     /**
      * Constructeur de la classe
+     * @param Int       $id         Id
+     * @param Int       $idClient   Id du client
+     * @param Int       $idPaiement Id du paiement
+     * @param Double    $total      Montant total
+     * @param DateTime  $horaire    Heure de préparation
+     * @param Int       $status     Statut de la commande
      */
     public function __construct($id, $idClient, $idPaiement, $total, $horaire, $status){
         $this->id = $id;
@@ -20,7 +30,10 @@ class Commande {
         $this->idPaiement = $idPaiement;
         $this->total = $total;
         $this->horaire = $horaire;
-        $this->status = $status;
+        $this->status = Status::getById($status);
+
+        $this->details = Detail::getAllByIdCommande($id);
+        $this->client = Client::getById($idClient);
     }
 
     /**
@@ -42,7 +55,7 @@ class Commande {
         $result = Database::select($query);
         $commandes = [];
         while($row = $result->fetch_array(MYSQL_ASSOC)) {
-            $commandes[] = new Commande($row["id"], $row["idClient"], $row["idPaiement"], $row["total"], $row["horaire"], $row["status"]);
+            $commandes[] = new Commande($row["id"], $row["idClient"], $row["idPaiement"], $row["Total"], $row["horaire"], $row["status"]);
         }
         return $commandes;
     }

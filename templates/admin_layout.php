@@ -15,6 +15,7 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="public/js/validate.js"></script>
 </head>
 
@@ -29,6 +30,9 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a href="admin.php?p=home" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin.php?r=commande&p=commandes" class="nav-link">Commandes</a>
                 </li>
                 <li class="nav-item">
                     <a href="admin.php?p=pizzas" class="nav-link">Les pizzas</a>
