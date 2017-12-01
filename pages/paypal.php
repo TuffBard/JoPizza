@@ -25,6 +25,9 @@
     }
  ?>
 
-Paiement par paypal
-<br>
-<button class="btn btn-success"> Payer <?=$money?> </button>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="public/js/paypal.js"></script>
+
+<h3>Montant à payer : <?=$money?></h3>
+
+<div id="paypal-button"></div>

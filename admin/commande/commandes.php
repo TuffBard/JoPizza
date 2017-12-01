@@ -12,12 +12,11 @@
                 <table class="list-commande table" width="100%">
                     <thead>
                         <tr>
-                            <th>N° Commande</th>
+                            <th>Horaire</th>
                             <th>Client</th>
                             <th>Contenu</th>
                             <th>Total</th>
                             <th>Statut</th>
-                            <th>Horaire</th>
                         </tr>
                     </thead>
                 </table>

@@ -18,14 +18,25 @@ function initDatatable(){
         ordering: false,
         info: false,
         columns: [
-            { data: "id", width: "10%" },
-            { data: "client.nom" },
-            { data: "details", width: "40%" },
+            { data: "horaire", width: "10%"},
+            { data: "client" },
+            { data: "details", width: "30%" },
             { data: "total" },
-            { data: "status" },
-            { data: "horaire" }
+            { data: "status" }
         ],
         columnDefs: [
+            {
+                targets: 0,
+                render: function(data, type, row) {
+                    return moment(data).format("DD/MM/YYYY <b>HH:mm</b>");
+                }
+            },
+            {
+                targets: 1,
+                render: function(data, type, row){
+                    return data.nom + " " + data.prenom
+                }
+            },
             {
                 targets: 2,
                 render: function(data, type, row) {
@@ -36,12 +47,6 @@ function initDatatable(){
                 targets: 3,
                 render: function(data, type, row) {
                     return parseFloat(data).toFixed(2).replace(".", ",") + " €";
-                }
-            },
-            {
-                targets: 5,
-                render: function(data, type, row) {
-                    return moment(data).format("DD/MM/YYYY HH:mm");
                 }
             }
         ]
