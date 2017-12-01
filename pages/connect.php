@@ -6,7 +6,6 @@
     session_start();
     //Appel des tables utilisées
     use App\Table\Client;
-    
     //Connexion du client
     $client = Client::login($_POST["username"],$_POST["password"]);
 

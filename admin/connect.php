@@ -6,7 +6,7 @@
     session_start();
     //Appel des class utilisées
     use App\Table\User;
-    
+
     //Connexion
     $user = User::login($_POST["username"],$_POST["password"]);
 

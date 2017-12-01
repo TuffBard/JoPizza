@@ -19,9 +19,10 @@ class User {
 
     public static function login($login, $password)
     {
+        $password = sha1($password);
         $query = "SELECT * FROM user WHERE login = '$login' AND password = '$password'";
         $result = Database::select($query);
-        
+
         if($result->num_rows != 0){
             $row = $result->fetch_array();
             $client = new User($row["id"],$row["name"],$row["login"],$row["password"]);

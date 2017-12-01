@@ -65,6 +65,7 @@ class Client {
      */
     public static function login($login, $password)
     {
+        $password = sha1($password);
         $query = "SELECT * FROM client WHERE login = '$login' AND password = '$password'";
         $result = Database::select($query);
         if($result->num_rows > 0){
