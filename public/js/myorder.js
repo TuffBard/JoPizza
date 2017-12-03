@@ -35,9 +35,21 @@ function initHoraire(){
 
     var hours = [];
     while (firstHour.isBefore(closeAt)) {
-        firstHour.add(10,"m");
+        firstHour.add(10,"m").add("minute", (firstHour.minute()%10>0?10-firstHour.minute()%10:0) );
         hours.push(firstHour.format("HH:mm"));
     }
+
+    $.ajax({
+        url: "api.php",
+        method: "GET",
+        data: {
+            p: "getCommandesOfDay"
+        },
+        success: function(data){
+            var commandes = JSON.parse(data);
+            console.log(commandes);
+        }
+    });
 
     //Remplis le select
     hours.forEach(function(x){

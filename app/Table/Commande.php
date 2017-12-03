@@ -4,6 +4,7 @@ namespace App\Table;
 use App\Table\Database;
 use App\Table\Pizza;
 use App\Table\Status;
+use \DateTime;
 
 class Commande {
     public $id;
@@ -65,6 +66,16 @@ class Commande {
      */
     public static function getAll() {
         $query = "SELECT * FROM commande";
+        return self::getList($query);
+    }
+
+    /**
+     * Renvoi toute les commandes du jour
+     */
+    public static function getAllOfTheDay() {
+        $now = new DateTime();
+        $now = $now->format("Y-m-d");
+        $query = "SELECT * FROM commande WHERE horaire > '$now'";
         return self::getList($query);
     }
 
