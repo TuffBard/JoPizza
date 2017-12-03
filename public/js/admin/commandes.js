@@ -1,13 +1,13 @@
-$(function(){
+$(function() {
     initDatatable();
 });
 
-function initDatatable(){
+function initDatatable() {
     $(".list-commande").DataTable({
         ajax: {
             url: "api.php",
             data: {
-                p: "getCommandes"
+                p: "getCommandesOfDay"
             },
             dataType: "json",
             dataSrc: ""
@@ -18,14 +18,13 @@ function initDatatable(){
         ordering: false,
         info: false,
         columns: [
-            { data: "horaire", width: "10%"},
+            { data: "horaire", width: "10%" },
             { data: "client" },
             { data: "details", width: "30%" },
             { data: "total" },
             { data: "status" }
         ],
-        columnDefs: [
-            {
+        columnDefs: [{
                 targets: 0,
                 render: function(data, type, row) {
                     return moment(data).format("DD/MM/YYYY <b>HH:mm</b>");
@@ -33,7 +32,7 @@ function initDatatable(){
             },
             {
                 targets: 1,
-                render: function(data, type, row){
+                render: function(data, type, row) {
                     return data.nom + " " + data.prenom
                 }
             },

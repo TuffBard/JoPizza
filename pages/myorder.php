@@ -36,12 +36,14 @@ $order = $_SESSION["order"];
                         <tbody>
                         <?php
                             $total = 0;
+                            $total_pizza = 0;
                             foreach ($order as $id => $quantity)
                             {
                                 if($quantity > 0)
                                 {
                                     $pizza = Pizza::getById($id);
                                     $total += $pizza->prix * $quantity;
+                                    $total_pizza += $quantity;
                         ?>
                                     <tr>
                                         <td><?=$pizza->libelle?></td>
@@ -56,8 +58,8 @@ $order = $_SESSION["order"];
                         <tr>
                             <td></td>
                             <td><b style="float:right">Total :</b></td>
-                            <td colspan="2"><?=$total?></td>
-                            <td></td>
+                            <td><?=$total?></td>
+                            <td id="total_pizza"><?=$total_pizza?></td>
                         </tr>
                         </tbody>
                     </table>

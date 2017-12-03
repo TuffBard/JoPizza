@@ -70,12 +70,13 @@ class Commande {
     }
 
     /**
-     * Renvoi toute les commandes du jour
+     * Renvoi toutes les commandes du jour
+     * @return Array<Commande> Commandes du jour
      */
     public static function getAllOfTheDay() {
         $now = new DateTime();
         $now = $now->format("Y-m-d");
-        $query = "SELECT * FROM commande WHERE horaire > '$now'";
+        $query = "SELECT * FROM commande WHERE horaire > '$now' ORDER BY horaire ASC";
         return self::getList($query);
     }
 
