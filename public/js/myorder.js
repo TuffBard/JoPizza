@@ -3,6 +3,9 @@ $(function() {
     initHoraire();
 });
 
+/**
+ * Initialise le tableau des commandes
+ */
 function initOrderTable() {
     $(".list-order").DataTable({
         searching: false,
@@ -19,6 +22,9 @@ function initOrderTable() {
     });
 }
 
+/**
+ * Remplis la selectbox des horaires
+ */
 function initHoraire() {
     //Horaire matin
     var morning_open = moment().hour(11).minute(30);
@@ -43,12 +49,25 @@ function initHoraire() {
             p: "getCommandesOfDay"
         },
         success: function(data) {
-            console.log(data);
             //Commandes en cours
             var commandes = JSON.parse(data);
             //Filtre les horaires déjà pris
             hours = hours.filter(function(el) {
-                return commandes.filter(c => moment(c.horaire).format("HH:mm") == el) == 0;
+                let isOk = true;
+                for(var c of commandes){
+                    //Transforme le datetime sous forme HH:mm
+                    let hour = moment(c.horaire).format("HH:mm");
+                    //Si plusieurs pizza, on bloque plusieurs horaires
+                    for (i = 0; i < c.quantity; i++) {
+                        h = hour.split(":");
+                        h[1] = ~~h[1] + 10 * i;
+                        h = h.join(':');
+                        if (h == el) {
+                            isOk = false;
+                        }
+                    }
+                }
+                return isOk;
             });
 
             var nb_pizza = ~~$("#total_pizza").html();

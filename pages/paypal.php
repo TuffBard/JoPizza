@@ -12,7 +12,7 @@
         //Supprime les données vides
         $details = array_filter($_SESSION["order"], function($v, $k){
             return ($v != "");
-        });
+        }, ARRAY_FILTER_USE_BOTH);
 
         $horaire = $_POST["horaire"];
         $horaire = explode(":",$horaire);
