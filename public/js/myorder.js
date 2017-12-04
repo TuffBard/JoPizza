@@ -38,9 +38,10 @@ function initHoraire() {
 
     var hours = [];
     while (firstHour.isBefore(closeAt)) {
-        firstHour.add(10, "m").add("minute", (firstHour.minute() % 10 > 0 ? 10 - firstHour.minute() % 10 : 0));
+        firstHour.add(10, "m").add("minute", (firstHour.minute() % 10 > 0 ? 10 - (firstHour.minute() % 10) : 0));
         hours.push(firstHour.format("HH:mm"));
     }
+    console.log(hours);
 
     $.ajax({
         url: "api.php",
@@ -59,9 +60,9 @@ function initHoraire() {
                     let hour = moment(c.horaire).format("HH:mm");
                     //Si plusieurs pizza, on bloque plusieurs horaires
                     for (i = 0; i < c.quantity; i++) {
-                        h = hour.split(":");
-                        h[1] = ~~h[1] + 10 * i;
-                        h = h.join(':');
+                        h = moment(hour,"HH:mm");
+                        h.subtract(10 * i, "minutes");
+                        h = h.format("HH:mm");
                         if (h == el) {
                             isOk = false;
                         }
@@ -69,25 +70,29 @@ function initHoraire() {
                 }
                 return isOk;
             });
+            console.log("Filtre horaire pris");
+            console.log(hours);
+
 
             var nb_pizza = ~~$("#total_pizza").html();
-            //Si plusieurs pizza, filtre les tranches horaires trop courte
-            if (nb_pizza > 1) {
-                hours = hours.filter(function(hour) {
-                    var isOk = true;
+            hours = hours.filter(function(hour) {
+                var isOk = true;
 
-                    for (i = 1; i < nb_pizza; i++) {
-                        let h = hour.split(":");
-                        h[1] = ~~h[1] - 10 * i;
-                        h = h.join(':');
-                        if (hours.indexOf(h) == -1) {
-                            isOk = false;
-                        }
+                for (i = 0; i < nb_pizza; i++) {
+                    let h = moment(hour, "HH:mm");
+                    h.subtract(10 * i, "minutes");
+                    h = h.format("HH:mm");
+                    if (hours.indexOf(h) == -1) {
+                        isOk = false;
                     }
+                }
 
-                    return isOk;
-                });
-            }
+                return isOk;
+            });
+
+            console.log("Filtre nb pizza");
+            console.log(hours);
+
             //Remplis le select
             hours.forEach(function(x) {
                 $("#horaire").append(new Option(x, x, true, true));
