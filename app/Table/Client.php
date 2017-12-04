@@ -75,5 +75,40 @@ class Client {
         }
         return null;
     }
+
+    /**
+     * Vérifie si une adresse mail est déjà existante.
+     * @param String $mail mail à vérifier
+     * @return Bool Vrai si le mail existe, Faux sinon
+     */
+    public static function MailAlreadyExist($mail){
+        $query = "SELECT * FROM client WHERE mail = '$mail'";
+        return isset(self::getList($query)[0]);
+    }
+
+    /**
+     * Vérifie si un login est déjà existant.
+     * @param String $login login à vérifier
+     * @return Bool Vrai si le login existe, Faux sinon
+     */
+    public static function LoginAlreadyExist($login){
+        $query = "SELECT * FROM client WHERE login = '$login'";
+        return isset(self::getList($query)[0]);
+    }
+
+    /**
+     * Créé un compte client
+     * @param  String $nom      Nom du client
+     * @param  String $prenom   Prénom du client
+     * @param  String $mail     Adresse mail
+     * @param  String $tel      Téléphone
+     * @param  String $login    Nom d'utilisateur
+     * @param  String $password Mot de passe
+     * @return Int           Id du client inséré
+     */
+    public static function insert($nom,$prenom,$mail,$tel,$login,$password){
+        $query = "INSERT INTO `client` (`nom`, `prenom`, `login`, `password`,`tel`,`mail`) VALUES ('$nom', '$prenom', '$login', '$password','$tel','$mail')";
+        return Database::insert($query);
+    }
 }
 ?>

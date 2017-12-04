@@ -83,7 +83,7 @@ class Commande {
         return self::getList($query);
     }
 
-        /**
+    /**
      * Ajoute une pizza
      * @param String $libelle Libellé de la pizza
      * @param Float $prix Prix de la pizza

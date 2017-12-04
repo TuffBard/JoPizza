@@ -8,7 +8,7 @@
                 <h4 class="card-title">Nouveau client</h4>
             </div>
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="index.php?r=compte&p=CreateCompte" method="POST">
                     <table class="mx-auto">
                         <tr>
                             <td><label>Nom : <span class="req">*</span></label></td>
@@ -35,7 +35,7 @@
                         </tr>
 
                         <tr><td><br></td></tr>
-                        
+
                         <tr>
                             <td><label class="mr-5">Mot de passe : <span class="req">*</span></label></td>
                             <td><input type="password" id="password" class="form-control required" placeholder="Mot de passe" name="password"></td>
