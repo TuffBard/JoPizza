@@ -68,6 +68,7 @@ $order = $_SESSION["order"];
                         <select id="horaire" class="form-control col-2" name="horaire"></select>
                     </div>
                     <input type="hidden" value="<?=$total?>"  name="total">
+                    <input type="hidden" value="<?=$total_pizza?>"  name="total_pizza">
                     <button class="btn btn-success float-right mt-md-3"><b>Valider</b></button>
                 </form>
             </div>

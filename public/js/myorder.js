@@ -43,6 +43,7 @@ function initHoraire() {
             p: "getCommandesOfDay"
         },
         success: function(data) {
+            console.log(data);
             //Commandes en cours
             var commandes = JSON.parse(data);
             //Filtre les horaires déjà pris

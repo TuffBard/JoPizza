@@ -15,6 +15,7 @@ class Commande {
     public $status;
     public $details;
     public $client;
+    public $quantity;
 
     /**
      * Constructeur de la classe
@@ -24,14 +25,16 @@ class Commande {
      * @param Double    $total      Montant total
      * @param DateTime  $horaire    Heure de préparation
      * @param Int       $status     Statut de la commande
+     * @param Int       $quantity   Quantité de pizza
      */
-    public function __construct($id, $idClient, $idPaiement, $total, $horaire, $status){
+    public function __construct($id, $idClient, $idPaiement, $total, $horaire, $status, $quantity){
         $this->id = $id;
         $this->idClient = $idClient;
         $this->idPaiement = $idPaiement;
         $this->total = $total;
         $this->horaire = $horaire;
         $this->status = Status::getById($status);
+        $this->quantity = $quantity;
 
         $this->details = Detail::getAllByIdCommande($id);
         $this->client = Client::getById($idClient);
@@ -56,7 +59,7 @@ class Commande {
         $result = Database::select($query);
         $commandes = [];
         while($row = $result->fetch_array(MYSQL_ASSOC)) {
-            $commandes[] = new Commande($row["id"], $row["idClient"], $row["idPaiement"], $row["Total"], $row["horaire"], $row["status"]);
+            $commandes[] = new Commande($row["id"], $row["idClient"], $row["idPaiement"], $row["Total"], $row["horaire"], $row["status"], $row["quantity"]);
         }
         return $commandes;
     }
@@ -86,8 +89,8 @@ class Commande {
      * @param Float $prix Prix de la pizza
      * @param Array<Int> $ingredients Liste des ids des ingrédients de la pizza
      */
-    public static function insert($idClient,$horaire,$total,$details){
-        $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`, `status`) VALUES ('$idClient', '$horaire', '$total', '1')";
+    public static function insert($idClient,$horaire,$total,$details,$quantity){
+        $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`, `status`,`quantity`) VALUES ('$idClient', '$horaire', '$total', '1','$quantity')";
         $idCommande = Database::insert($query);
         foreach($details as $idPizza => $quantity){
             Detail::insertPizza($idCommande, $idPizza, $quantity);
