@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 01 déc. 2017 à 17:01
+-- Généré le :  lun. 04 déc. 2017 à 17:21
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -48,7 +48,13 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `nom`, `prenom`, `login`, `password`, `dateNaissance`, `adresse`, `codePostal`, `tel`, `mail`) VALUES
-(1, 'Garcia', 'Nicolas', 'ngarcia', 'f41e03d1fb6ec773db0f987fba9853f46ee513cc', '1995-05-11', NULL, NULL, '0689536602', 'ngarcia@umanis.com');
+(1, 'Garcia', 'Nicolas', 'ngarcia', 'f41e03d1fb6ec773db0f987fba9853f46ee513cc', '1995-05-11', NULL, NULL, '0689536602', 'ngarcia@umanis.com'),
+(2, 'Garcia', 'Nicolas', 'ngarcia@umanis.com', '0102030405', NULL, NULL, NULL, 'NGI', '112358'),
+(3, 'Garcia', 'Nicolas', 'ngarcia@umanis.com', '0102030405', NULL, NULL, NULL, 'NGI', '112358'),
+(4, 'Garcia', 'Nicolas', 'NGI', '112358', NULL, NULL, NULL, '0102030405', 'ngarcia@umanis.com'),
+(5, 'Garcia', 'Nicolas', 'NGI', '199626c8c784e9ff0afd303429161aa037e96646', NULL, NULL, NULL, '0102030405', 'ngarcia@umanis.com'),
+(6, 'Garcia', 'Nicolas', 'NGI', '199626c8c784e9ff0afd303429161aa037e96646', NULL, NULL, NULL, '0102030405', 'ngarcia@umanis.com'),
+(7, 'Garcia', 'Nicolas', 'NGI', '199626c8c784e9ff0afd303429161aa037e96646', NULL, NULL, NULL, '0102030405', 'ngarcia@umanis.com');
 
 -- --------------------------------------------------------
 
@@ -62,21 +68,18 @@ CREATE TABLE `commande` (
   `idPaiement` int(11) DEFAULT NULL,
   `Total` double DEFAULT NULL,
   `horaire` datetime DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `idClient`, `idPaiement`, `Total`, `horaire`, `status`) VALUES
-(8, 1, NULL, 50.5, '2017-11-30 11:50:00', 1),
-(9, 1, NULL, 50.5, '2017-11-30 11:50:00', 1),
-(10, 1, NULL, 94.5, '2017-11-30 13:30:00', 1),
-(11, 1, NULL, 18, '2017-11-30 13:30:00', 1),
-(12, 1, NULL, 6.5, '2017-12-01 22:00:00', 1),
-(13, 1, NULL, 6.5, '2017-12-01 22:00:00', 1),
-(14, 1, NULL, 9, '2017-12-01 22:00:00', 1);
+INSERT INTO `commande` (`id`, `idClient`, `idPaiement`, `Total`, `horaire`, `status`, `quantity`) VALUES
+(19, 1, NULL, 8.5, '2017-12-04 19:00:00', 1, 1),
+(18, 1, NULL, 17.5, '2017-12-04 12:20:00', 1, 2),
+(17, 1, NULL, 9, '2017-12-04 11:50:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -97,19 +100,10 @@ CREATE TABLE `detail` (
 --
 
 INSERT INTO `detail` (`id`, `idPizza`, `idCommande`, `idPerso`, `quantity`) VALUES
-(11, 1, 8, NULL, 1),
-(12, 3, 8, NULL, 2),
-(13, 6, 8, NULL, 3),
-(14, 1, 9, NULL, 1),
-(15, 3, 9, NULL, 2),
-(16, 6, 9, NULL, 3),
-(17, 1, 10, NULL, 1),
-(18, 3, 10, NULL, 4),
-(19, 5, 10, NULL, 6),
-(20, 6, 11, NULL, 2),
-(21, 1, 12, NULL, 1),
-(22, 1, 13, NULL, 1),
-(23, 5, 14, NULL, 1);
+(29, 4, 19, NULL, 1),
+(28, 9, 18, NULL, 1),
+(27, 2, 18, NULL, 1),
+(26, 11, 17, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -410,15 +404,20 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT pour la table `ingredient`
 --
