@@ -1,4 +1,7 @@
-<?php 
+<?php
+/**
+ * Class gérant la auto-chargement des autres classes
+ */
 class Autoloader{
 
     static function register(){

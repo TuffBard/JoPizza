@@ -3,6 +3,9 @@ namespace App\Table;
 
 use App\Table\Database;
 
+/**
+ * Classe Client gérant les comptes de la partie Client
+ */
 class Client {
     public $id;
     public $nom;

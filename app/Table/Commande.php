@@ -6,6 +6,9 @@ use App\Table\Pizza;
 use App\Table\Status;
 use \DateTime;
 
+/**
+ * Classe gérant les commandes
+ */
 class Commande {
     public $id;
     public $idClient;

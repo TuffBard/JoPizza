@@ -1,6 +1,11 @@
 <?php
 namespace App\Table;
+
 use \mysqli;
+
+/**
+ * Classe database gérant la connexion à la BDD et l'éxécution des requetes
+ */
 class Database {
     private static $host = "127.0.0.1";
     private static $user = "root";

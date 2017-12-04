@@ -4,6 +4,9 @@ namespace App\Table;
 use App\Table\Database;
 use App\Table\Pizza;
 
+/**
+ * Class gérant le détail d'une commande
+ */
 class Detail {
     public $id;
     public $idCommande;

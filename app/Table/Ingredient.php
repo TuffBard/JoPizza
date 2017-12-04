@@ -1,18 +1,21 @@
-<?php  
+<?php
 namespace App\Table;
 
 use App\Table\Database;
 
-class Ingredient { 
-    public $id; 
-    public $libelle; 
+/**
+ * Classe gérant les ingrédients
+ */
+class Ingredient {
+    public $id;
+    public $libelle;
 
     /**
      * Constructeur de la classe
      */
-    public function __construct($id, $libelle){ 
-        $this->id = $id; 
-        $this->libelle = $libelle; 
+    public function __construct($id, $libelle){
+        $this->id = $id;
+        $this->libelle = $libelle;
     }
 
     /**
@@ -63,6 +66,11 @@ class Ingredient {
         return self::getList($query);
     }
 
+    /**
+     * Renvoi un ingrédient en fonction de son id
+     * @param  Int $id Id recherché
+     * @return Ingredient L'ingrédient recherché
+     */
     public static function getById($id){
         $query = "SELECT * FROM ingredient WHERE id = " . $id;
         $result = Database::select($query);
@@ -76,13 +84,13 @@ class Ingredient {
      * @return Array<Ingredient> Liste des ingrédients de la pizza
      */
     public static function getByPizzaId($id) {
-        $query = "SELECT i.id, i.libelle 
-                FROM ingredient i 
-                LEFT JOIN listingredient l on i.id = l.idIngredient 
+        $query = "SELECT i.id, i.libelle
+                FROM ingredient i
+                LEFT JOIN listingredient l on i.id = l.idIngredient
                 WHERE l.idPizza = " . $id . "
                 ORDER BY l.idIngredient";
 
-        return self::getList($query); 
+        return self::getList($query);
     }
 
     /**
@@ -91,14 +99,14 @@ class Ingredient {
      * @return Array<Ingredient> Liste des ingredients trouvé
      */
     public static function getList($query){
-        $result = Database::select($query); 
-        $ingredients = []; 
- 
-        while($row = $result->fetch_array(MYSQL_ASSOC)) { 
-            $ingredient = new Ingredient($row["id"],$row["libelle"]); 
-            $ingredients[] = $ingredient; 
-        } 
-        return $ingredients; 
+        $result = Database::select($query);
+        $ingredients = [];
+
+        while($row = $result->fetch_array(MYSQL_ASSOC)) {
+            $ingredient = new Ingredient($row["id"],$row["libelle"]);
+            $ingredients[] = $ingredient;
+        }
+        return $ingredients;
     }
 
     /**
@@ -109,6 +117,6 @@ class Ingredient {
         $query = "DELETE FROM `listingredient` WHERE idPizza = " . $idPizza;
         Database::delete($query);
     }
-} 
- 
+}
+
 ?>

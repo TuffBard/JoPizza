@@ -4,6 +4,9 @@ namespace App\Table;
 use App\Table\Database;
 use App\Table\Ingredient;
 
+/**
+ * Classe gérant les pizzas
+ */
 class Pizza {
     public $id;
     public $libelle;
