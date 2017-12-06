@@ -248,6 +248,7 @@ class CurlClient implements ClientInterface
         $msg .= " let us know at support@stripe.com.";
 
         $msg .= "\n\n(Network error [errno $errno]: $message)";
+        var_dump($msg);
         throw new Error\ApiConnection($msg);
     }
 

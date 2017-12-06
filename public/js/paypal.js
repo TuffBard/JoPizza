@@ -63,10 +63,10 @@ function initPaypalButton(){
               url: "api.php?r=Stripe&p=payment",
               method: "POST",
               data: {
-                  token: result.token
+                  token: result.token.id
               },
               success: function(data){
-                  console.log(data);
+                  $(".result").html(data);
               },
               error: function(status, xhr, err){
                   console.log(err);
