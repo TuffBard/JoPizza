@@ -41,7 +41,6 @@ function initHoraire() {
         firstHour.add(10, "m").add("minute", (firstHour.minute() % 10 > 0 ? 10 - (firstHour.minute() % 10) : 0));
         hours.push(firstHour.format("HH:mm"));
     }
-    console.log(hours);
 
     $.ajax({
         url: "api.php",
@@ -70,8 +69,6 @@ function initHoraire() {
                 }
                 return isOk;
             });
-            console.log("Filtre horaire pris");
-            console.log(hours);
 
 
             var nb_pizza = ~~$("#total_pizza").html();
@@ -89,9 +86,6 @@ function initHoraire() {
 
                 return isOk;
             });
-
-            console.log("Filtre nb pizza");
-            console.log(hours);
 
             //Remplis le select
             hours.forEach(function(x) {

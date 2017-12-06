@@ -1,45 +1,78 @@
 $(function(){
     initPaypalButton();
-})
+});
 
+/**
+ * Initialise le bouton paypal avec Stripe
+ * @return {[type]} [description]
+ */
 function initPaypalButton(){
-    paypal.Button.render({
+    // Create a Stripe client
+    var stripe = Stripe('pk_test_CB9CBhMYCjxMmp6fj1oeealm');
 
-        env: 'production', //'production' Or 'sandbox',
+    // Create an instance of Elements
+    var elements = stripe.elements();
 
-        commit: true, // Show a 'Pay Now' button
-
-        style: {
-            color: 'gold',
-            size: 'large',
-            locale: 'fr_FR',
-            shape: 'rect',
-            label: 'paypal'
-        },
-
-        payment: function(data, actions) {
-            /*
-             * Set up the payment here
-             */
-        },
-
-        onAuthorize: function(data, actions) {
-            /*
-             * Execute the payment here
-             */
-        },
-
-        onCancel: function(data, actions) {
-            /*
-             * Buyer cancelled the payment
-             */
-        },
-
-        onError: function(err) {
-            /*
-             * An error occurred during the transaction
-             */
+    // Custom styling can be passed to options when creating an Element.
+    // (Note that this demo uses a wider set of styles than the guide below.)
+    var style = {
+      base: {
+        color: '#32325d',
+        lineHeight: '18px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
         }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
 
-    }, '#paypal-button');
+    // Create an instance of the card Element
+    var card = elements.create('card', {style: style});
+
+    // Add an instance of the card Element into the `card-element` <div>
+    card.mount('#card-element');
+
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    // Handle form submission
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          $.ajax({
+              url: "api.php?r=Stripe&p=payment",
+              method: "POST",
+              data: {
+                  token: result.token
+              },
+              success: function(data){
+                  console.log(data);
+              },
+              error: function(status, xhr, err){
+                  console.log(err);
+              }
+          });
+        }
+      });
+    });
 }

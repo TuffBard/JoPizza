@@ -1,7 +1,10 @@
 <?php
     require("app/autoloader.php");
     Autoloader::register();
-    
+
     $p = isset($_GET["p"]) ? $_GET["p"] : "notfound";
-    require("api/" . $p . ".php");
-?> 
+
+    $r = isset($_GET['r']) ? $_GET['r'] . "/" : "";
+
+    require("api/" . $r . $p . ".php");
+?>

@@ -25,10 +25,54 @@
         $_SESSION["commande"] = $idCommande;
     }
  ?>
-
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script src="public/js/paypal.js"></script>
 
-<h3>Montant à payer : <?=$money?></h3>
+<style media="screen">
+/**
+* The CSS shown here will not be introduced in the Quickstart guide, but shows
+* how you can use CSS to style your Element's container.
+*/
+.StripeElement {
+background-color: white;
+height: 40px;
+padding: 10px 12px;
+border-radius: 4px;
+border: 1px solid transparent;
+box-shadow: 0 1px 3px 0 #e6ebf1;
+-webkit-transition: box-shadow 150ms ease;
+transition: box-shadow 150ms ease;
+}
 
-<div id="paypal-button"></div>
+.StripeElement--focus {
+box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+background-color: #fefde5 !important;
+}
+
+#card-element {
+    width: 400px;
+}
+</style>
+<div class="container">
+    <h4>Paiement de la commande</h4>
+    <br>
+    <form action="/charge" method="post" id="payment-form">
+      <div class="form-row">
+        <div id="card-element">
+          <!-- a Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display form errors -->
+        <div id="card-errors" role="alert"></div>
+      </div>
+
+      <button class="btn btn-success">Payer <?=$money?></button>
+    </form>
+</div>
