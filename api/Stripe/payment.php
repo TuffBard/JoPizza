@@ -1,17 +1,16 @@
 <?php
     session_start();
-
     use App\Table\Commande;
-
+    //Connexion à Stripe
     \Stripe\Stripe::setApiKey("sk_test_l1DL9xhQWorSn0weoNSxKLCa");
 
     $token = $_POST['token'];
 
-    try{
+    try {
         if(isset($_SESSION["commande"]) && isset($_POST["total"])){
             $total = $_POST["total"] * 100;
             $commande = $_SESSION["commande"];
-
+            //Effectue le paiement -> Renvoi une exception si erreur
             $charge = \Stripe\Charge::create(array(
             "amount" => $total,
             "currency" => "eur",
@@ -23,6 +22,7 @@
             echo "success";
         }
     } catch(Exception $e){
+        //Renvoi un message d'erreur si le paiement à échoué.
         $mess = "";
         switch($e->getMessage()){
             case "Your card has expired.":
@@ -39,6 +39,6 @@
                 //echo $e->getMessage() . "<br>";
                 $mess = "Une erreur est survenue lors du paiement.";
         }
-        echo "<label style='color:red;'>$mess</label>";
+        echo "<div class='alert alert-danger' role='alert'>$mess</div>";
     }
  ?>

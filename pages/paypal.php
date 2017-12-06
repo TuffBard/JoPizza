@@ -31,6 +31,8 @@ if(!isset($_SESSION["commande"]))
 
 <div class="container">
     <div class="col-12">
+        <!-- Div contenant l'erreur si le paiement échoue -->
+        <div class="result"></div>
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Paiement de la commande</h4>
@@ -38,7 +40,9 @@ if(!isset($_SESSION["commande"]))
             <div class="card-body">
                 <form action="/charge" method="post" id="payment-form">
                     <div class="form-row">
+                        <!-- Contient l'input pour la carte bancaire -->
                         <div id="card-element"></div>
+                        <!-- Affiche les erreurs lors de la saisie de la carte -->
                         <div id="card-errors" class="ml-auto" role="alert"></div>
                         <input id="total" type="hidden" value="<?=$total?>">
                         <button class="btn btn-success">Payer <?=$money?></button>
@@ -47,9 +51,5 @@ if(!isset($_SESSION["commande"]))
             </div>
         </div>
     </div>
-
-</div>
-
-<div class="result">
 
 </div>
