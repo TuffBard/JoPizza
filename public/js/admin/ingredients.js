@@ -1,6 +1,6 @@
 $(function(){
     initIngredientTable();
-})
+});
 
 function initIngredientTable(){
     $(".list-ingredient").DataTable({

@@ -2,6 +2,9 @@ $(function() {
     initDatatable();
 });
 
+/**
+ * Initialise le tableau des commandes
+ */
 function initDatatable() {
     $(".list-commande").DataTable({
         ajax: {
@@ -33,7 +36,7 @@ function initDatatable() {
         {
             targets: 1,
             render: function(data, type, row) {
-                return data.nom + " " + data.prenom
+                return data.nom + " " + data.prenom;
             }
         },
         {
@@ -69,47 +72,52 @@ function initDatatable() {
 });
 }
 
+/**
+ * Renvoi les données pour le template status en fonction de du status
+ * @param  String status de la commande
+ * @return JSON        Données nécessaires au template-status
+ */
 function getValues(status){
     switch (status) {
         case "En attente de paiement":
-            return {
-                status: status,
-                icon: "oi-timer",
-                color: "warning"
-            };
+        return {
+            status: status,
+            icon: "oi-timer",
+            color: "warning"
+        };
         case "Paiement validé":
-            return {
-                status: status,
-                icon: "oi-credit-card",
-                color: "info"
-            };
+        return {
+            status: status,
+            icon: "oi-credit-card",
+            color: "info"
+        };
         case "En préparation":
-            return {
-                status: status,
-                icon: "oi-timer",
-                color: "primary"
-            };
+        return {
+            status: status,
+            icon: "oi-timer",
+            color: "primary"
+        };
         case "Commande prête":
-            return {
-                status: status,
-                icon: "oi-check",
-                color: "success"
-            }
+        return {
+            status: status,
+            icon: "oi-check",
+            color: "success"
+        };
         case "Commande terminée":
-            return {
-                status: status,
-                icon: "oi-thumb-up",
-                color: "muted"
-            }
+        return {
+            status: status,
+            icon: "oi-thumb-up",
+            color: "muted"
+        };
         case "Commande annulée":
-            return {
-                status: status,
-                icon: "oi-x",
-                color: "danger"
-            }
+        return {
+            status: status,
+            icon: "oi-x",
+            color: "danger"
+        };
         default:
-            return {
-                status: status
-            };
+        return {
+            status: status
+        };
     }
 }

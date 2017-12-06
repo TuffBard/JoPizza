@@ -44,10 +44,10 @@ function initIngredientTable() {
                 dataType: "JSON",
                 success: function(ingredients){
                     ingredients.forEach(x => {
-                        $(".chk_"+x.id).prop("checked", true)
+                        $(".chk_"+x.id).prop("checked", true);
                     });
                 }
-            })
+            });
         }
     });
 }
