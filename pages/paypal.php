@@ -40,6 +40,7 @@ if(!isset($_SESSION["commande"]))
                     <div class="form-row">
                         <div id="card-element"></div>
                         <div id="card-errors" class="ml-auto" role="alert"></div>
+                        <input id="total" type="hidden" value="<?=$total?>">
                         <button class="btn btn-success">Payer <?=$money?></button>
                     </div>
                 </form>

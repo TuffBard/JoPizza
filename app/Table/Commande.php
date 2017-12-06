@@ -44,6 +44,17 @@ class Commande {
     }
 
     /**
+     * Modifie le status d'une commande
+     * @param Int $idCommande Id de  la commande à modifier
+     * @param Int $idStatus Id du status à attribuer (Voir table Status)
+     * @return Bool True si ok, sinon False
+     */
+    public static function setStatus($idCommande, $idStatus){
+        $query = "UPDATE Commande SET status = '$idStatus' WHERE id = '$idCommande'";
+        return Database::update($query);
+    }
+
+    /**
      * Renvoi une commande en fonction de son id
      * @param int $id Id de la commande
      * @return Commande

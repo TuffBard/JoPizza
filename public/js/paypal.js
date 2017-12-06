@@ -3,9 +3,9 @@ $(function(){
 });
 
 /**
- * Initialise le bouton paypal avec Stripe
- * @return {[type]} [description]
- */
+* Initialise le bouton paypal avec Stripe
+* @return {[type]} [description]
+*/
 function initPaypalButton(){
     // Create a Stripe client
     var stripe = Stripe('pk_test_CB9CBhMYCjxMmp6fj1oeealm');
@@ -16,20 +16,20 @@ function initPaypalButton(){
     // Custom styling can be passed to options when creating an Element.
     // (Note that this demo uses a wider set of styles than the guide below.)
     var style = {
-      base: {
-        color: '#32325d',
-        lineHeight: '18px',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#aab7c4'
+        base: {
+            color: '#32325d',
+            lineHeight: '18px',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
         }
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-      }
     };
 
     // Create an instance of the card Element
@@ -40,39 +40,43 @@ function initPaypalButton(){
 
     // Handle real-time validation errors from the card Element.
     card.addEventListener('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
-      }
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
     });
 
     // Handle form submission
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
-      event.preventDefault();
+        event.preventDefault();
 
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          $.ajax({
-              url: "api.php?r=Stripe&p=payment",
-              method: "POST",
-              data: {
-                  token: result.token.id
-              },
-              success: function(data){
-                  $(".result").html(data);
-              },
-              error: function(status, xhr, err){
-                  console.log(err);
-              }
-          });
-        }
-      });
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                // Inform the user if there was an error
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                $.ajax({
+                    url: "api.php?r=Stripe&p=payment",
+                    method: "POST",
+                    data: {
+                        token: result.token.id,
+                        total: $("#total").val()
+                    },
+                    success: function(data){
+                        if(data == "success"){
+                            window.location = "index.php?r=paiement&p=success";
+                        }
+                        $(".result").html(data);
+                    },
+                    error: function(status, xhr, err){
+                        console.log(err);
+                    }
+                });
+            }
+        });
     });
 }

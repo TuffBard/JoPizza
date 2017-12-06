@@ -1,20 +1,27 @@
 <?php
+    session_start();
+
+    use App\Table\Commande;
 
     \Stripe\Stripe::setApiKey("sk_test_l1DL9xhQWorSn0weoNSxKLCa");
-
-    //\Stripe\Stripe::setClientId("cus_BtTr3BIbwt4OJJ");
 
     $token = $_POST['token'];
 
     try{
-        $charge = \Stripe\Charge::create(array(
-        "amount" => 1000,
-        "currency" => "eur",
-        "description" => "Example charge",
-        "source" => $token,
-        ));
+        if(isset($_SESSION["commande"]) && isset($_POST["total"])){
+            $total = $_POST["total"] * 100;
+            $commande = $_SESSION["commande"];
 
-        //Do success payment !
+            $charge = \Stripe\Charge::create(array(
+            "amount" => $total,
+            "currency" => "eur",
+            "description" => "Example charge",
+            "source" => $token,
+            ));
+            //Passe le statut de la commande à "Paiement validé"
+            Commande::setStatus($commande, 2);
+            echo "success";
+        }
     } catch(Exception $e){
         $mess = "";
         switch($e->getMessage()){
@@ -34,6 +41,4 @@
         }
         echo "<label style='color:red;'>$mess</label>";
     }
-
-    // var_dump($charge);
  ?>
