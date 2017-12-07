@@ -3,8 +3,8 @@ $(function() {
 });
 
 /**
- * Initialise le tableau des commandes
- */
+* Initialise le tableau des commandes
+*/
 function initDatatable() {
     $(".list-commande").DataTable({
         ajax: {
@@ -55,7 +55,7 @@ function initDatatable() {
             targets: 4,
             render: function(data, type, row) {
                 let template = $("#template-status").html();
-                let values = getValues(data);
+                let values = getValues(row.idStatus, row.status);
 
                 return Mustache.render(template, values);
             }
@@ -64,52 +64,68 @@ function initDatatable() {
             targets: 5,
             render: function(data, type, row){
                 let template = $("#template-actions").html();
-                let values = {};
+                let values = {
+                    id: row.id,
+                    status: row.idStatus
+                };
                 return Mustache.render(template, values);
             }
         }
-    ]
+    ],
+    drawCallback: function(){
+        initBtns();
+    },
+    initComplete: function(){
+        autoReload();
+    }
 });
 }
 
+function autoReload(){
+    setTimeout(function(){
+        $(".list-commande").DataTable().ajax.reload();
+        autoReload();
+    }, 15000);
+}
+
 /**
- * Renvoi les données pour le template status en fonction de du status
- * @param  String status de la commande
- * @return JSON        Données nécessaires au template-status
- */
-function getValues(status){
-    switch (status) {
-        case "En attente de paiement":
+* Renvoi les données pour le template status en fonction de du status
+* @param  String status de la commande
+* @return JSON        Données nécessaires au template-status
+*/
+function getValues(idStatus, status){
+    switch (idStatus) {
+        case "1": //En attente de paiement
         return {
             status: status,
             icon: "oi-timer",
             color: "warning"
         };
-        case "Paiement validé":
+        case "2": //Paiement validé
         return {
             status: status,
             icon: "oi-credit-card",
             color: "info"
         };
-        case "En préparation":
+        case "3": //En préparation
         return {
             status: status,
             icon: "oi-timer",
             color: "primary"
         };
-        case "Commande prête":
+        case "4": //Commande prête
         return {
             status: status,
             icon: "oi-check",
             color: "success"
         };
-        case "Commande terminée":
+        case "5": //Commande terminée
         return {
             status: status,
             icon: "oi-thumb-up",
             color: "muted"
         };
-        case "Commande annulée":
+        case "31": //Commande annulée
         return {
             status: status,
             icon: "oi-x",
@@ -120,4 +136,37 @@ function getValues(status){
             status: status
         };
     }
+}
+
+/**
+* Initialise les boutons du tableau
+* @return {[type]} [description]
+*/
+function initBtns(){
+    $(".btn-next").click(nextStatus);
+}
+
+/**
+ * Passe le status au suivant
+ */
+function nextStatus(){
+    var id = $(this).data("id");
+    var status = ~~$(this).data("status") + 1;
+
+    $.ajax({
+        url: "api.php?r=Status&p=setStatus",
+        type: "POST",
+        data: {
+            id: id,
+            status: status
+        },
+        success: function(result){
+            if(result == 1){
+                $(".list-commande").DataTable().ajax.reload();
+            }
+        },
+        error: function(status, xhr, err){
+            //console.log(err);
+        }
+    });
 }

@@ -15,6 +15,7 @@ class Commande {
     public $idPaiement;
     public $total;
     public $horaire;
+    public $idStatus;
     public $status;
     public $details;
     public $client;
@@ -30,13 +31,14 @@ class Commande {
      * @param Int       $status     Statut de la commande
      * @param Int       $quantity   Quantité de pizza
      */
-    public function __construct($id, $idClient, $idPaiement, $total, $horaire, $status, $quantity){
+    public function __construct($id, $idClient, $idPaiement, $total, $horaire, $idStatus, $quantity){
         $this->id = $id;
         $this->idClient = $idClient;
         $this->idPaiement = $idPaiement;
         $this->total = $total;
         $this->horaire = $horaire;
-        $this->status = Status::getById($status);
+        $this->idStatus = $idStatus;
+        $this->status = Status::getById($idStatus);
         $this->quantity = $quantity;
 
         $this->details = Detail::getAllByIdCommande($id);
@@ -79,7 +81,7 @@ class Commande {
     }
 
     /**
-     * Renvoi toute les commandes
+     * Renvoi toutes les commandes
      */
     public static function getAll() {
         $query = "SELECT * FROM commande";
@@ -98,10 +100,13 @@ class Commande {
     }
 
     /**
-     * Ajoute une pizza
-     * @param String $libelle Libellé de la pizza
-     * @param Float $prix Prix de la pizza
-     * @param Array<Int> $ingredients Liste des ids des ingrédients de la pizza
+     * Créé une commande
+     * @param  Int $idClient Id du client
+     * @param  DateTime $horaire  Horaire de préparation de la commande
+     * @param  Float $total    Montant total de la commande
+     * @param  Array<Int,Int> $details  Tableau contenant l'id et la quantité des pizzas de la commande
+     * @param  Int $quantity Quantité total de la commande
+     * @return Int           Id de la commande créés
      */
     public static function insert($idClient,$horaire,$total,$details,$quantity){
         $query = "INSERT INTO `commande` (`idClient`, `horaire`, `total`, `status`,`quantity`) VALUES ('$idClient', '$horaire', '$total', '1','$quantity')";

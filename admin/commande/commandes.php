@@ -31,6 +31,7 @@
 </script>
 
 <script id="template-actions" type="x-tmpl-mustache">
+    <button class="btn btn-sm btn-success btn-next" data-id="{{id}}" data-status="{{status}}"><span class='oi oi-caret-right'></span></button>
     <button class="btn btn-sm btn-primary"><span class='oi oi-pencil'></span></button>
     <button class="btn btn-sm btn-danger"><span class='oi oi-x'></span></button>
 </script>
