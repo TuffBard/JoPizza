@@ -63,12 +63,7 @@ function initDatatable() {
         {
             targets: 5,
             render: function(data, type, row){
-                let template = $("#template-actions").html();
-                let values = {
-                    id: row.id,
-                    status: row.idStatus
-                };
-                return Mustache.render(template, values);
+                return getAction(row);
             }
         }
     ],
@@ -81,11 +76,62 @@ function initDatatable() {
 });
 }
 
+/**
+ * Recharge le tableau des commandes
+ */
+function tableReload(){
+    $(".list-commande").DataTable().ajax.reload();
+}
+
+/**
+* Actualise le tableau des commandes
+*/
 function autoReload(){
     setTimeout(function(){
-        $(".list-commande").DataTable().ajax.reload();
+        tableReload();
         autoReload();
     }, 15000);
+}
+
+/**
+ * Renvoi les boutons d'actions en fonction du status de la commande
+ * @param  Object row Ligne du tableau
+ * @return HtmlString
+ */
+function getAction(row){
+    let template, values;
+
+    switch (row.idStatus) {
+        case "1": //En attente de paiement
+        return "";
+        case "2": //Paiement validé
+        template = $("#template-actions").html();
+        values = {
+            id: row.id,
+            status: row.idStatus
+        };
+        return Mustache.render(template, values);
+        case "3": //En préparation
+        template = $("#template-actions").html();
+        values = {
+            id: row.id,
+            status: row.idStatus
+        };
+        return Mustache.render(template, values);
+        case "4": //Commande prête
+        template = $("#template-actions").html();
+        values = {
+            id: row.id,
+            status: row.idStatus
+        };
+        return Mustache.render(template, values);
+        case "5": //Commande terminée
+        return "";
+        case "31": //Commande annulée
+        return "";
+        default:
+        return "";
+    }
 }
 
 /**
@@ -144,11 +190,46 @@ function getValues(idStatus, status){
 */
 function initBtns(){
     $(".btn-next").click(nextStatus);
+    $(".btn-abort").click(modalAnnulerCommande);
+    $("#btn-annulerCommande").click(annulerCommande);
 }
 
 /**
- * Passe le status au suivant
+ * Passe la commande au status "Commande annulée"
  */
+function annulerCommande(){
+    var id = $("#modalId").val();
+
+    $.ajax({
+        url: "api.php?r=Status&p=setStatus",
+        type: "POST",
+        data: {
+            id: id,
+            status: 31
+        },
+        success: function(result){
+            if(result == 1){
+                tableReload();
+                $("#modalAnnuler").modal("hide");
+            }
+        }
+    });
+}
+
+/**
+ * Ouvre la modal de confirmation d'annulation de la commande
+ * @return {[type]} [description]
+ */
+function modalAnnulerCommande(){
+    var id = $(this).data("id");
+
+    $("#modalAnnuler").modal("show");
+    $("#modalId").val(id);
+}
+
+/**
+* Passe le status au suivant
+*/
 function nextStatus(){
     var id = $(this).data("id");
     var status = ~~$(this).data("status") + 1;
@@ -162,7 +243,7 @@ function nextStatus(){
         },
         success: function(result){
             if(result == 1){
-                $(".list-commande").DataTable().ajax.reload();
+                tableReload();
             }
         },
         error: function(status, xhr, err){
