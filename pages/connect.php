@@ -13,6 +13,10 @@
         header('Location: ../index.php?p=connexion&bl=1');
     } else {
         $_SESSION["client"] = $client;
-        header('Location: ../index.php');
+        if(isset($_SESSION["order"])){
+            header('Location: ../index.php?p=myorder');
+        } else{
+            header('Location: ../index.php');
+        }
     }
 ?>
