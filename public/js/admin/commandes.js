@@ -15,6 +15,9 @@ function initDatatable() {
             dataType: "json",
             dataSrc: ""
         },
+        language: {
+            emptyTable: "Aucune commande trouvée"
+        },
         searching: false,
         paging: false,
         lengthChange: false,

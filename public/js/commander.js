@@ -26,29 +26,35 @@ function initPizzaTable() {
             { data: "id" }
         ],
         columnDefs: [{
-                targets: 2,
-                render: function(data, type, row) {
-                    return parseFloat(data).toFixed(2).replace(".", ",") + " €";
-                }
-            },
-            {
-                targets: 3,
-                render: function(data, type, row) {
-                    let template = $("#template-input").html();
-                    let values = { id: data };
-                    return Mustache.render(template, values);
-                }
+            targets: 0,
+            render: function(data){
+                return "<b>" + data + "</b>";
             }
-            // , {
-            //     targets: 4,
-            //     render: function(data, type, row) {
-            //         let template = $("#template-action").html();
-            //         let values = { id: data };
-            //         return Mustache.render(template, values);
-            //     }
-            // }
-        ]
-    });
+        },
+        {
+            targets: 2,
+            render: function(data, type, row) {
+                return parseFloat(data).toFixed(2).replace(".", ",") + " €";
+            }
+        },
+        {
+            targets: 3,
+            render: function(data, type, row) {
+                let template = $("#template-input").html();
+                let values = { id: data };
+                return Mustache.render(template, values);
+            }
+        }
+        // , {
+        //     targets: 4,
+        //     render: function(data, type, row) {
+        //         let template = $("#template-action").html();
+        //         let values = { id: data };
+        //         return Mustache.render(template, values);
+        //     }
+        // }
+    ]
+});
 }
 
 

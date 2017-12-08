@@ -24,9 +24,15 @@ function initTable(){
             { data: "id" }
         ],
         columnDefs: [{
+            targets: 0,
+            render: function(data){
+                return "<b>" + data + "</b>";
+            }
+        },
+            {
                 targets: 2,
                 render: function(data, type, row) {
-                    return parseFloat(data).toFixed(2).replace(".", ",") + " €";
+                    return parseFloat(data).replace(".", ",") + " €";
                 }
             },
             {
