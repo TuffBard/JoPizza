@@ -42,7 +42,7 @@ class Commande {
         $this->quantity = $quantity;
 
         $this->details = Detail::getAllByIdCommande($id);
-        $this->client = Client::getById($idClient);
+        $this->client = $idClient > 0 ? Client::getById($idClient) : "";
     }
 
     /**

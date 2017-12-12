@@ -13,9 +13,10 @@
         header('Location: ../index.php?p=connexion&bl=1');
     } else {
         $_SESSION["client"] = $client;
+        //Si commande en cours, renvoi vers la commande
         if(isset($_SESSION["order"])){
             header('Location: ../index.php?p=myorder');
-        } else{
+        } else{ //Sinon retour à l'Accueil
             header('Location: ../index.php');
         }
     }
