@@ -82,12 +82,12 @@ if(isset($_POST["pizzas"])){
                     <br/>
                     <div class="form-inline">
                         <label for="lastname" class="label col-2">Nom :</label>
-                        <input type="text" id="lastname" class="form-control col-2" name="lastname"></select>
+                        <input type="text" id="lastname" class="form-control col-2 required mr-2" name="lastname"></select>
                     </div>
                     <br/>
                     <div class="form-inline">
                         <label for="firstname" class="label col-2">Prénom :</label>
-                        <input type="text" id="firstname" class="form-control col-2" name="firstname"></select>
+                        <input type="text" id="firstname" class="form-control col-2 required mr-2" name="firstname"></select>
                     </div>
                     <br/>
                     <div class="form-inline">

@@ -73,6 +73,9 @@ function initBtnContinuer() {
     });
 }
 
+/**
+ * Vérifie qu'au moins une pizza soit sélectionnée
+ */
 function initFormValidation() {
     $("form").submit(function(event){
 

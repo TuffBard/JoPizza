@@ -10,10 +10,12 @@
                     <div class="form-inline justify-content-center">
                         <input type="text" id="username" class="form-control col-3 required" placeholder="Nom d'utilisateur" name="username">
                     </div>
+                    <label id="username-error" class="error" for="username"></label>
                     <br/>
                     <div class="form-inline justify-content-center">
                         <input type="password" id="password" class="form-control col-3 required" placeholder="Mot de passe" name="password">
                     </div>
+                    <label id="password-error" class="error" for="password"></label>
                     <br>
                     <?php
                     if (isset($_GET["bl"])) {

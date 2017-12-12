@@ -46,7 +46,7 @@ function initHoraire() {
         url: "api.php",
         method: "GET",
         data: {
-            p: "getCommandesOfDay"
+            p: "getConfirmedCommandesOfDay"
         },
         success: function(data) {
             //Commandes en cours

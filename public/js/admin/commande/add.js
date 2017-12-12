@@ -1,8 +1,12 @@
 $(function(){
     initTable();
     initHoraire();
+    initFormValidation();
 });
 
+/**
+ * Initialise le tableau des pizzas
+ */
 function initTable(){
     $(".list-pizza").DataTable({
         ajax: {
@@ -72,7 +76,7 @@ function initHoraire() {
         url: "api.php",
         method: "GET",
         data: {
-            p: "getCommandesOfDay"
+            p: "getConfirmedCommandesOfDay"
         },
         success: function(data) {
             //Commandes en cours
@@ -169,4 +173,22 @@ function getFirstHour() {
         }
     }
     return firstHour;
+}
+
+/**
+ * Vérifie qu'au moins une pizza soit sélectionnée
+ */
+function initFormValidation() {
+    $("form").submit(function(event){
+
+        let total = 0;
+        $(".input-pizza").each(function () {
+            total += ~~$(this).val();
+        });
+
+        if(total == 0){
+            event.preventDefault();
+            $("#pizza-error").html("Veuillez choisir au moins une pizza.");
+        }
+    });
 }

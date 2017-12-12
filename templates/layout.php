@@ -8,6 +8,9 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/open-iconic/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -37,7 +40,17 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
             ?>
                 <ul class='navbar-nav'>
                     <li class="nav-item">
-                        <a href='index.php?p=disconnect' class="nav-link">Déconnexion</a>
+                        <a href='index.php?r=commande&p=mesCommandes' class="nav-link">Mes commandes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href='index.php?r=compte&p=monCompte' class="nav-link">
+                            <span class="oi oi-person"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href='index.php?p=disconnect' class="nav-link">
+                            <span class="oi oi-power-standby"></span>
+                        </a>
                     </li>
                 </ul>
             <?php

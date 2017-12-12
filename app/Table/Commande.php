@@ -100,6 +100,17 @@ class Commande {
     }
 
     /**
+     * Renvoi toutes les commandes du jour
+     * @return Array<Commande> Commandes du jour
+     */
+    public static function getAllConfirmedOfTheDay() {
+        $now = new DateTime();
+        $now = $now->format("Y-m-d");
+        $query = "SELECT * FROM commande WHERE horaire > '$now' AND status <= '5' ORDER BY horaire ASC";
+        return self::getList($query);
+    }
+
+    /**
      * Créé une commande
      * @param  Int $idClient Id du client
      * @param  DateTime $horaire  Horaire de préparation de la commande

@@ -47,11 +47,11 @@ class Client {
     }
 
     /**
-     * Renvoi un client en fonction de son nom et prénom
-     * @param  String $nom    Nom du client
-     * @param  String $prenom Prénom du client
-     * @return Client         Renvoi le client trouvé ou null
-     */
+    * Renvoi un client en fonction de son nom et prénom
+    * @param  String $nom    Nom du client
+    * @param  String $prenom Prénom du client
+    * @return Client         Renvoi le client trouvé ou null
+    */
     public static function getByNames($nom, $prenom){
         $query = "SELECT * FROM client WHERE nom = '$nom' AND prenom = '$prenom'";
         $clients = self::getList($query);
@@ -83,16 +83,15 @@ class Client {
     */
     public static function login($login, $password)
     {
-        if($login != "" && $password != ""){
-            $password = sha1($password);
-            $query = "SELECT * FROM client WHERE login = '$login' AND password = '$password'";
-            $result = Database::select($query);
-            if($result->num_rows > 0){
-                $row = $result->fetch_array();
-                $client = new Client($row["id"],$row["nom"],$row["prenom"],$row["login"],$row["password"],$row["tel"],$row["mail"]);
-                return $client;
-            }
+        $password = sha1($password);
+        $query = "SELECT * FROM client WHERE login = '$login' AND password = '$password'";
+        $result = Database::select($query);
+        if($result->num_rows > 0){
+            $row = $result->fetch_array();
+            $client = new Client($row["id"],$row["nom"],$row["prenom"],$row["login"],$row["password"],$row["tel"],$row["mail"]);
+            return $client;
         }
+
         return null;
     }
 
