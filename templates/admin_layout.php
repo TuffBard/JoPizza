@@ -10,7 +10,7 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
     <link rel="stylesheet" href="public/css/main.css">
     <link rel="stylesheet" href="public/open-iconic/font/css/open-iconic-bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
@@ -47,7 +47,10 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
             </ul>
             <ul class='navbar-nav'>
                 <li class="text-light">
-                    Bonjour <?=$user->name?> ! <a href="admin.php?p=disconnect">Deconnexion</a>
+                    Bonjour <?=$user->name?> !
+                    <a href="admin.php?p=disconnect" class="ml-3">
+                        <span class="oi oi-power-standby"></span>
+                    </a>
                 </li>
             </ul>
             <?php
