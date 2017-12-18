@@ -17,10 +17,6 @@ class Status {
             case 2:
                 return "Paiement validé";
             case 3:
-                return "En préparation";
-            case 4:
-                return "Commande prête";
-            case 5:
                 return "Commande terminée";
             case 21:
                 return "Echec de paiement";

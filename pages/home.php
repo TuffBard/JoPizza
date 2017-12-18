@@ -1,7 +1,7 @@
 
 <div class="jumbotron jumbo-title">
     <h1 class="display-3">Jo Pizza !</h1>
-    <p class="lead">118, Avenue Francis de Préssensé, 69200 Vénissieux</p>
+    <p class="lead">118, Avenue Francis de Préssensé, 69200 <span>Vénissieux</span></p>
     <hr class="my-4">
     <p>Du lundi au vendredi de 11h30 à 13h30</p>
     <p>Tous les soirs du lundi au dimanche de 18h30 à 22h00</p>

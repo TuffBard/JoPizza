@@ -57,3 +57,8 @@ body {
 .error {
     color: red;
 }
+
+p.lead span {
+    font-size: 18pt;
+    font-weight: normal;
+}

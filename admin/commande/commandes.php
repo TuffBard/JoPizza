@@ -1,4 +1,4 @@
-<script src="public/js/admin/commandes.js"></script>
+<script src="public/js/admin/commande/commandes.js"></script>
 
 <br/>
 <div class="container">
@@ -12,7 +12,8 @@
                 <table class="list-commande table" width="100%">
                     <thead>
                         <tr>
-                            <th>Horaire</th>
+                            <th>Horaire début</th>
+                            <th>Horaire fin</th>
                             <th>Client</th>
                             <th>Contenu</th>
                             <th>Total</th>
@@ -56,6 +57,6 @@
 <!-- Template des actions -->
 <script id="template-actions" type="x-tmpl-mustache">
     <button class="btn btn-sm btn-success btn-next" data-id="{{id}}" data-status="{{status}}"><span class='oi oi-caret-right'></span></button>
-    <button class="btn btn-sm btn-primary"><span class='oi oi-pencil'></span></button>
+    <!-- <button class="btn btn-sm btn-primary"><span class='oi oi-pencil'></span></button> -->
     <button class="btn btn-sm btn-danger btn-abort" data-id="{{id}}"><span class='oi oi-x'></span></button>
 </script>

@@ -25,6 +25,7 @@ function initDatatable() {
         info: false,
         columns: [
             { data: "horaire", width: "10%" },
+            { data: "horaire", width: "10%" },
             { data: "client" },
             { data: "details", width: "30%" },
             { data: "total" },
@@ -32,30 +33,37 @@ function initDatatable() {
         ],
         columnDefs: [{
             targets: 0,
-            render: function(data, type, row) {
-                return moment(data).format("DD/MM/YYYY <b>HH:mm</b>");
+            render: function(data, type, row){
+                console.log(row);
+                return moment(data).subtract("minutes", 10 * row.quantity).format("DD/MM/YY <b>HH:mm</b>");
             }
         },
         {
             targets: 1,
             render: function(data, type, row) {
-                return data.nom + " " + data.prenom;
+                return moment(data).format("DD/MM/YY <b>HH:mm</b>");
             }
         },
         {
             targets: 2,
             render: function(data, type, row) {
-                return "<table width='100%'>" + data.map(d => "<tr><td>" + d.pizza.libelle + "</td><td>" + d.quantity + "</td></tr>").join("") + "</table>";
+                return data.nom + " " + data.prenom;
             }
         },
         {
             targets: 3,
             render: function(data, type, row) {
-                return parseFloat(data).toFixed(2).replace(".", ",") + " €";
+                return "<table width='100%'>" + data.map(d => "<tr><td>" + d.pizza.libelle + "</td><td>" + d.quantity + "</td></tr>").join("") + "</table>";
             }
         },
         {
             targets: 4,
+            render: function(data, type, row) {
+                return parseFloat(data).toFixed(2).replace(".", ",") + " €";
+            }
+        },
+        {
+            targets: 5,
             render: function(data, type, row) {
                 let template = $("#template-status").html();
                 let values = getValues(row.idStatus, row.status);
@@ -64,7 +72,7 @@ function initDatatable() {
             }
         },
         {
-            targets: 5,
+            targets: 6,
             render: function(data, type, row){
                 return getAction(row);
             }
@@ -114,21 +122,7 @@ function getAction(row){
             status: row.idStatus
         };
         return Mustache.render(template, values);
-        case "3": //En préparation
-        template = $("#template-actions").html();
-        values = {
-            id: row.id,
-            status: row.idStatus
-        };
-        return Mustache.render(template, values);
-        case "4": //Commande prête
-        template = $("#template-actions").html();
-        values = {
-            id: row.id,
-            status: row.idStatus
-        };
-        return Mustache.render(template, values);
-        case "5": //Commande terminée
+        case "3": //Commande terminée
         return "";
         case "31": //Commande annulée
         return "";
@@ -156,19 +150,7 @@ function getValues(idStatus, status){
             icon: "oi-credit-card",
             color: "info"
         };
-        case "3": //En préparation
-        return {
-            status: status,
-            icon: "oi-timer",
-            color: "primary"
-        };
-        case "4": //Commande prête
-        return {
-            status: status,
-            icon: "oi-check",
-            color: "success"
-        };
-        case "5": //Commande terminée
+        case "3": //Commande terminée
         return {
             status: status,
             icon: "oi-thumb-up",
