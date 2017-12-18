@@ -4,7 +4,11 @@ $client = isset($_SESSION["client"]) ? $_SESSION["client"] : null;
 <html>
 
 <head>
+    <title>Jo-Pizza.fr</title>
     <meta charset="utf-8" />
+    <meta name="language" content="fr">
+    <meta name="author" content="nicolasemg.fr">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="public/css/main.css">

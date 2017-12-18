@@ -4,6 +4,7 @@ $user = isset($_SESSION["user"]) ? $_SESSION["user"] : NULL;
 <html>
 
 <head>
+    <title>JoPizza - Admin</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">

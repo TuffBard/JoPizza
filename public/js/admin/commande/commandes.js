@@ -34,8 +34,7 @@ function initDatatable() {
         columnDefs: [{
             targets: 0,
             render: function(data, type, row){
-                console.log(row);
-                return moment(data).subtract("minutes", 10 * row.quantity).format("DD/MM/YY <b>HH:mm</b>");
+                return moment(data).subtract(10 * row.quantity, "minutes").format("DD/MM/YY <b>HH:mm</b>");
             }
         },
         {
@@ -91,7 +90,14 @@ function initDatatable() {
  * Recharge le tableau des commandes
  */
 function tableReload(){
-    $(".list-commande").DataTable().ajax.reload();
+    var before = $(".list-commande").DataTable().ajax.json().length;
+    $(".list-commande").DataTable().ajax.reload(function(json){
+        var after = json.length;
+        if(after > before){
+            let notif = new Audio("public/sound/alert.mp3");
+            notif.play();
+        }
+    });
 }
 
 /**
@@ -99,6 +105,7 @@ function tableReload(){
 */
 function autoReload(){
     setTimeout(function(){
+
         tableReload();
         autoReload();
     }, 15000);

@@ -52,7 +52,7 @@ function initPaypalButton(){
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-
+        $(".btn-success").prop("disabled", true);
         stripe.createToken(card).then(function(result) {
             if (result.error) {
                 // Inform the user if there was an error
@@ -73,7 +73,7 @@ function initPaypalButton(){
                         $(".result").html(data);
                     },
                     error: function(status, xhr, err){
-                        console.log(err);
+                        $(".btn-success").prop("disabled", false);
                     }
                 });
             }

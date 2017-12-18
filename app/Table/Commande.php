@@ -111,6 +111,16 @@ class Commande {
     }
 
     /**
+     * Renvoi toutes les commandes d'un client en fonction de son id
+     * @param  Int $id Id du client
+     * @return Array<Commande>     Liste des commandes du client
+     */
+    public static function getAllByIdClient($id) {
+        $query = "SELECT * FROM commande WHERE idClient = $id ORDER BY horaire DESC";
+        return self::getList($query);
+    }
+
+    /**
      * Créé une commande
      * @param  Int $idClient Id du client
      * @param  DateTime $horaire  Horaire de préparation de la commande
