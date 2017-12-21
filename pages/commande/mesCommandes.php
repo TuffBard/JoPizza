@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Les commandes</h4>
+                <h4 class="card-title">Mes commandes</h4>
             </div>
             <div class="card-body">
                 <input id="idClient" type="hidden" value="<?=$_SESSION["client"]->id?>">
